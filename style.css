@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+body {
+    background: radial-gradient(circle, rgba(32,49,76,1) 0%, rgba(32,36,40,1) 100%);
+    background-size: 100vw 200vh;
+    background-position: 0px -100vh;
+    font-family: 'Inter';
+    color: #FFF;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    height: 30vh;
+}
+
+.header {
+    text-align: center;
+}
+
+.header h2 {
+    font-size: larger;
+    font-weight: 300;
+}
+
+.checkbox {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}
+
+.checkbox h3{
+    font-size: small;
+    font-weight: 300;
+}
+
+.checkbox span {
+    text-decoration: underline;
+}
+
+.checkbox-container input[type="checkbox"] {
+    display: none;
+}
+
+.checkbox-container {
+    display: inline-block;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-container .checkmark {
+    transition: all 0.5s;
+    height: 24px;
+    width: 24px;
+    background-color: transparent;
+    border: 2px solid #007AFF;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+    background-color: #007AFF;
+    transition: all 0.5s;
+}
+
+.checkbox-container input:checked ~ .checkmark::after {
+    content: "";
+    width: 15px;
+    height: 25px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: all 0.5s;
+}
+
+.buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.primary__blue__btn {
+    text-decoration: none;
+    color: #FFF;
+    font-weight: 600;
+    background-color: #007AFF;
+    padding: 20px;
+    width: 60%;
+    text-align: center;
+    border-radius: 12px;
+    transition: all 0.5s;
+}
+
+.primary__dark__btn {
+    text-decoration: none;
+    color: #007AFF;
+    font-weight: 600;
+    background-color: #20344D;
+    padding: 20px;
+    width: 60%;
+    text-align: center;
+    border-radius: 12px;
+    transition: all 0.5s;
+}
+
+.primary__dark__btn:hover {
+    background-color: #007AFF;
+    color: #FFF;
+    transition: all 0.5s;
+}
+
+.primary__blue__btn:hover {
+    background-color: #20344D;
+    color: #007AFF;
+    transition: all 0.5s;
+}
+
+.btns_container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap:20px;
+}
