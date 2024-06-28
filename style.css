@@ -163,3 +163,15 @@ body {
     flex-wrap: wrap;
     align-items: center;
 }
+
+.backbutton {
+    position: fixed;
+    top:10px;
+    left:10px;
+    font-size: xx-large;
+}
+
+.backbutton a {
+    text-decoration: none;
+    color: #FFF;
+}
