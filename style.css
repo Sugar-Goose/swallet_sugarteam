@@ -175,3 +175,74 @@ body {
     text-decoration: none;
     color: #FFF;
 }
+
+.words__container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.word {
+    width: 40%;
+    text-align: center;
+    background-color: rgba(0,0,0, 0.2);
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.dots {
+    margin-top: 80px;
+    display: flex;
+    justify-content: center;
+    gap:20px;
+}
+
+.dot {
+    width: 32px;
+    height: 32px;
+    background-color: #4E5562;
+    border-radius: 1000px;
+    transition: all 0.25s;
+}
+
+.dot.active {
+    background-color: #D9D9D9;
+    transition: all 0.25s;
+}
+
+.keyboard {
+    margin-top: 150px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.kb_button {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+    height: 40px;
+    text-align: center;
+    padding: 5px;
+    background-color: rgba(217, 217, 217, 0.19);
+    border-radius: 6px;
+    font-weight: bolder;
+    transition: all 0.25s;
+}
+
+.kb_button:active {
+    background-color: rgba(217, 217, 217, 0.5);
+    transition: all 0.25s;
+}
+
+.kb_button.none {
+    visibility: hidden;
+}
+
+.kb_button.backspace {
+    background-color: transparent;
+}
