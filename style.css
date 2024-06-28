@@ -131,3 +131,35 @@ body {
     justify-content: center;
     gap:20px;
 }
+
+.close__disclaimer {
+    position: fixed;
+    top:20px;
+    right: 20px;
+    background-color: #007AFF;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 100px;
+}
+
+.disclaimer__overlay {
+    display: none;
+}
+
+.disclaimer__overlay.active {
+    display: block;
+}
+
+.logo.hidden, .header.hidden, .checkbox.hidden, .buttons.hidden {
+    display: none;
+}
+
+.checkboxes__container {
+    display: flex;
+    justify-content: start;
+    margin-left: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}

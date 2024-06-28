@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safety</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <section class="logo">
+        <img src="../assets/logo-without-bg 1.png" alt="logo">
+    </section>
+
+    <section class="header">
+        <h1>Safety</h1>
+    </section>
+
+    <section class="checkboxes__container">
+        <section class="checkbox">
+            <label class="checkbox-container">
+                <input type="checkbox" id="agreeCheckbox">
+                <span class="checkmark"></span>
+            </label>
+            <h3>Now the secret words will appear. Write<br>them down in the correct order and keep<br>them in a safe place.</h3>
+        </section>
+        <section class="checkbox">
+            <label class="checkbox-container">
+                <input type="checkbox" id="agreeCheckbox2">
+                <span class="checkmark"></span>
+            </label>
+            <h3>They allow you to access your wallet if you<br>forget your password or lose access to this<br>device.</h3>
+        </section>
+        <section class="checkbox">
+            <label class="checkbox-container">
+                <input type="checkbox" id="agreeCheckbox2">
+                <span class="checkmark"></span>
+            </label>
+            <h3>If anyone sees these words, your funds may<br>be stolen. Make sure no one is nearby!</h3>
+        </section>
+    </section>
+
+    <section class="buttons">
+        <div class="btns_container">
+            <a href="#" class="primary__blue__btn disabled" id="continue">Continue</a>
+        </div>
+    </section>
+</body>
+
+<script>
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const continueButton = document.getElementById('continue');
+
+    function checkCheckboxes() {
+        const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+        if (allChecked) {
+            continueButton.classList.remove('disabled');
+        } else {
+            continueButton.classList.add('disabled');
+        }
+    }
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', checkCheckboxes);
+    });
+</script>
+</html>
