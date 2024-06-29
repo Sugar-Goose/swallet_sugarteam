@@ -1,23 +1,49 @@
 <!DOCTYPE html>
-<html lang="en" id="main">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wallet</title>
+    <title>Swap</title>
     <link rel="stylesheet" href="../style.css">
 </head>
-<body> 
-    <section class="balance__card__container">
-        <div class="balance__card">
-            <h1 class="balance">$0.00</h1>
-
-            <div class="action__buttons__balance__card">
-                <a href="#"><img src="../assets/Group 2.png" alt="send"></a>
-                <a href="#"><img src="../assets/Group 4.png" alt="refresh"></a>
-                <a href="#"><img src="../assets/Group 3.png" alt="receive"></a>
+<body>
+    <section class="swap__coins">
+        <div class="first__coin coin__swap">
+            <h3 class="swap__from">FROM</h3>
+            <div class="asset">
+                <div class="leftrow">
+                    <img src="../assets/crypto_icons/btc.png" alt="btc">
+                    <div class="leftrow__text">
+                        <h3>BTC</h3>
+                        <h4>$71 234.47</h4>
+                    </div>
+                </div>
+    
+                <div class="rightrow">
+                    <img src="../assets/Arrow_down.png" alt="">
+                </div>
             </div>
+            <input type="number" class="swap__input" placeholder="0">
         </div>
-    </section> 
+
+        <div class="second__coin coin__swap">
+            <h3 class="swap__from">TO</h3>
+            <div class="asset">
+                <div class="leftrow">
+                    <img src="../assets/crypto_icons/usdt.png" alt="btc">
+                    <div class="leftrow__text">
+                        <h3>USDT</h3>
+                        <h4>$0.98</h4>
+                    </div>
+                </div>
+    
+                <div class="rightrow">
+                    <img src="../assets/Arrow_down.png" alt="">
+                </div>
+            </div>
+            <input type="number" class="swap__input" placeholder="0">
+        </div>
+    </section>
 
     <section class="alert__message">
         <div class="first_row">
@@ -27,15 +53,19 @@
         <a href="#" class="deploy__button">Deploy Wallet</a>
     </section>
 
-    <section class="switcher">
-        <div class="switch">
-            <button id="assetsBtn" class="tab active">Assets</button>
-            <button id="historyBtn" class="tab">History</button>
-            <div id="slider" class="slider"></div>
+    <section class="buttons">
+        <div class="btns_container">
+            <a href="#" class="primary__blue__btn disabled">SWAP</a>
         </div>
     </section>
 
-    <section class="assets active">
+    <section class="bottom__menu">
+        <a href="/swallet_sugarteam/main_page" class="menu__button"><img src="../assets/Home Page.png" alt=""></a>
+        <a href="#" class="menu__button active"><img src="../assets/Swap.png" alt=""></a>
+        <a href="/swallet_sugarteam/setting" class="menu__button"><img src="../assets/Gear.png" alt=""></a>
+    </section>
+
+    <section class="assets active pick__from__swap">
         <div class="asset">
             <div class="leftrow">
                 <img src="../assets/crypto_icons/btc.png" alt="btc">
@@ -195,16 +225,5 @@
             </div>
         </div>
     </section>
-
-    <section class="history__tab">
-        <h3>History is empty</h3>
-    </section>
-
-    <section class="bottom__menu">
-        <a href="/swallet_sugarteam/main_page" class="menu__button active"><img src="../assets/Home Page.png" alt=""></a>
-        <a href="#" class="menu__button"><img src="../assets/Swap.png" alt=""></a>
-        <a href="/swallet_sugarteam/setting" class="menu__button"><img src="../assets/Gear.png" alt=""></a>
-    </section>
 </body>
-<script src="../index.js"></script>
 </html>
