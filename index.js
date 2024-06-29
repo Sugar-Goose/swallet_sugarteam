@@ -1,5 +1,6 @@
 const startPage = document.querySelector("#startPage")
 const pinPage = document.querySelector("#pin")
+const mainPage = document.querySelector("#main")
 
 if (startPage) {
     document.getElementById('agreeCheckbox').addEventListener('change', function() {
@@ -69,6 +70,32 @@ if (pinPage) {
                 activeIndex--;
                 dots[activeIndex].classList.remove('active');
             }
+        });
+    });
+}
+
+if (mainPage) {
+    document.addEventListener('DOMContentLoaded', function() {
+        const assetsBtn = document.getElementById('assetsBtn');
+        const historyBtn = document.getElementById('historyBtn');
+        const slider = document.getElementById('slider');
+        const historyTab = document.querySelector('.history__tab');
+        const assetsTab = document.querySelector(".assets");
+    
+        assetsBtn.addEventListener('click', () => {
+            slider.style.transform = 'translateX(0)';
+            assetsBtn.classList.add('active');
+            assetsTab.classList.add('active');
+            historyBtn.classList.remove('active');
+            historyTab.classList.remove('active')
+        });
+    
+        historyBtn.addEventListener('click', () => {
+            slider.style.transform = 'translateX(100%)';
+            assetsBtn.classList.remove('active');
+            assetsTab.classList.remove('active');
+            historyBtn.classList.add('active');
+            historyTab.classList.add('active')
         });
     });
 }

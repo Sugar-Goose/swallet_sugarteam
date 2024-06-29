@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" id="main">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body> 
+    <section class="balance__card__container">
+        <div class="balance__card">
+            <h1 class="balance">$0.00</h1>
+
+            <div class="action__buttons__balance__card">
+                <a href="#"><img src="../assets/Group 2.png" alt="buy"></a>
+                <a href="#"><img src="../assets/Group 3.png" alt="buy"></a>
+            </div>
+        </div>
+    </section> 
+
+    <section class="alert__message">
+        <div class="first_row">
+            <img src="../assets/Group 25.png" alt="alert">
+            <p>To use the wallet, you need to deploy it<br>on the network using a USDT transaction</p>
+        </div> 
+        <a href="#" class="deploy__button">Deploy Wallet</a>
+    </section>
+
+    <section class="switcher">
+        <div class="switch">
+            <button id="assetsBtn" class="tab active">Assets</button>
+            <button id="historyBtn" class="tab">History</button>
+            <div id="slider" class="slider"></div>
+        </div>
+    </section>
+
+    <section class="assets active">
+        <div class="asset">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/btc.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>BTC</h3>
+                    <h4>$71 234.47</h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3>0</h3>
+                <h4>$0.00</h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/usdt.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>USDT</h3>
+                    <h4>$0.98</h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3>0</h3>
+                <h4>$0.00</h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/trx.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>TRX</h3>
+                    <h4>$0.12</h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3>0</h3>
+                <h4>$0.00</h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/bnb.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>BNB</h3>
+                    <h4>$573.12</h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3>0</h3>
+                <h4>$0.00</h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/bch.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>BCH</h3>
+                    <h4>$380.65</h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3>0</h3>
+                <h4>$0.00</h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/eth.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>ETH</h3>
+                    <h4>$3 427.58</h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3>0</h3>
+                <h4>$0.00</h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset">
+            <div class="leftrow">
+                <img class="sol_img" src="../assets/crypto_icons/sol.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>SOL</h3>
+                    <h4>$139.41</h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3>0</h3>
+                <h4>$0.00</h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/atom.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>ATOM</h3>
+                    <h4>$6.8</h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3>0</h3>
+                <h4>$0.00</h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/busd.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>BUSD</h3>
+                    <h4>$1</h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3>0</h3>
+                <h4>$0.00</h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/ltc.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>LTC</h3>
+                    <h4>$71.62</h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3>0</h3>
+                <h4>$0.00</h4>
+            </div>
+        </div>
+    </section>
+
+    <section class="history__tab">
+        <h3>History is empty</h3>
+    </section>
+
+    <section class="bottom__menu">
+        <a href="#" class="menu__button active"><img src="../assets/Home Page.png" alt=""></a>
+        <a href="#" class="menu__button"><img src="../assets/Swap.png" alt=""></a>
+        <a href="#" class="menu__button"><img src="../assets/Gear.png" alt=""></a>
+    </section>
+</body>
+<script src="../index.js"></script>
+</html>
