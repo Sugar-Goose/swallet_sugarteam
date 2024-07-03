@@ -495,3 +495,41 @@ hr {
 .first__coin {
     margin-bottom: 20px;
 }
+
+.dropdown {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+.dropdown a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown a:hover {
+    background-color: #ddd;
+}
+
+.private_key_block p {
+    font-size: small;
+}
+
+.private_key_alert {
+    background-color: #F48181;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 11px;
+}
+
+.private_key_alert h3 {
+    font-size: medium;
+}
+
+.assets.hidden, .bottom__menu.hidden {
+    display: none;
+}

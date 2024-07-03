@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="swap">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,7 @@
     <section class="swap__coins">
         <div class="first__coin coin__swap">
             <h3 class="swap__from">FROM</h3>
-            <div class="asset">
+            <div class="asset" id="from-card">
                 <div class="leftrow">
                     <img src="../assets/crypto_icons/btc.png" alt="btc">
                     <div class="leftrow__text">
@@ -28,7 +28,7 @@
 
         <div class="second__coin coin__swap">
             <h3 class="swap__from">TO</h3>
-            <div class="asset">
+            <div class="asset" id="to-card">
                 <div class="leftrow">
                     <img src="../assets/crypto_icons/usdt.png" alt="btc">
                     <div class="leftrow__text">
@@ -61,169 +61,9 @@
 
     <section class="bottom__menu">
         <a href="/swallet_sugarteam/main_page" class="menu__button"><img src="../assets/Home Page.png" alt=""></a>
-        <a href="#" class="menu__button active"><img src="../assets/Swap.png" alt=""></a>
+        <a href="/swallet_sugarteam/swap" class="menu__button active"><img src="../assets/Swap.png" alt=""></a>
         <a href="/swallet_sugarteam/setting" class="menu__button"><img src="../assets/Gear.png" alt=""></a>
     </section>
-
-    <section class="assets active pick__from__swap">
-        <div class="asset">
-            <div class="leftrow">
-                <img src="../assets/crypto_icons/btc.png" alt="btc">
-                <div class="leftrow__text">
-                    <h3>BTC</h3>
-                    <h4>$71 234.47</h4>
-                </div>
-            </div>
-
-            <div class="rightrow">
-                <h3>0</h3>
-                <h4>$0.00</h4>
-            </div>
-        </div>
-        <hr>
-
-        <div class="asset">
-            <div class="leftrow">
-                <img src="../assets/crypto_icons/usdt.png" alt="btc">
-                <div class="leftrow__text">
-                    <h3>USDT</h3>
-                    <h4>$0.98</h4>
-                </div>
-            </div>
-
-            <div class="rightrow">
-                <h3>0</h3>
-                <h4>$0.00</h4>
-            </div>
-        </div>
-        <hr>
-
-        <div class="asset">
-            <div class="leftrow">
-                <img src="../assets/crypto_icons/trx.png" alt="btc">
-                <div class="leftrow__text">
-                    <h3>TRX</h3>
-                    <h4>$0.12</h4>
-                </div>
-            </div>
-
-            <div class="rightrow">
-                <h3>0</h3>
-                <h4>$0.00</h4>
-            </div>
-        </div>
-        <hr>
-
-        <div class="asset">
-            <div class="leftrow">
-                <img src="../assets/crypto_icons/bnb.png" alt="btc">
-                <div class="leftrow__text">
-                    <h3>BNB</h3>
-                    <h4>$573.12</h4>
-                </div>
-            </div>
-
-            <div class="rightrow">
-                <h3>0</h3>
-                <h4>$0.00</h4>
-            </div>
-        </div>
-        <hr>
-
-        <div class="asset">
-            <div class="leftrow">
-                <img src="../assets/crypto_icons/bch.png" alt="btc">
-                <div class="leftrow__text">
-                    <h3>BCH</h3>
-                    <h4>$380.65</h4>
-                </div>
-            </div>
-
-            <div class="rightrow">
-                <h3>0</h3>
-                <h4>$0.00</h4>
-            </div>
-        </div>
-        <hr>
-
-        <div class="asset">
-            <div class="leftrow">
-                <img src="../assets/crypto_icons/eth.png" alt="btc">
-                <div class="leftrow__text">
-                    <h3>ETH</h3>
-                    <h4>$3 427.58</h4>
-                </div>
-            </div>
-
-            <div class="rightrow">
-                <h3>0</h3>
-                <h4>$0.00</h4>
-            </div>
-        </div>
-        <hr>
-
-        <div class="asset">
-            <div class="leftrow">
-                <img class="sol_img" src="../assets/crypto_icons/sol.png" alt="btc">
-                <div class="leftrow__text">
-                    <h3>SOL</h3>
-                    <h4>$139.41</h4>
-                </div>
-            </div>
-
-            <div class="rightrow">
-                <h3>0</h3>
-                <h4>$0.00</h4>
-            </div>
-        </div>
-        <hr>
-
-        <div class="asset">
-            <div class="leftrow">
-                <img src="../assets/crypto_icons/atom.png" alt="btc">
-                <div class="leftrow__text">
-                    <h3>ATOM</h3>
-                    <h4>$6.8</h4>
-                </div>
-            </div>
-
-            <div class="rightrow">
-                <h3>0</h3>
-                <h4>$0.00</h4>
-            </div>
-        </div>
-        <hr>
-
-        <div class="asset">
-            <div class="leftrow">
-                <img src="../assets/crypto_icons/busd.png" alt="btc">
-                <div class="leftrow__text">
-                    <h3>BUSD</h3>
-                    <h4>$1</h4>
-                </div>
-            </div>
-
-            <div class="rightrow">
-                <h3>0</h3>
-                <h4>$0.00</h4>
-            </div>
-        </div>
-        <hr>
-
-        <div class="asset">
-            <div class="leftrow">
-                <img src="../assets/crypto_icons/ltc.png" alt="btc">
-                <div class="leftrow__text">
-                    <h3>LTC</h3>
-                    <h4>$71.62</h4>
-                </div>
-            </div>
-
-            <div class="rightrow">
-                <h3>0</h3>
-                <h4>$0.00</h4>
-            </div>
-        </div>
-    </section>
 </body>
+<script src="../index.js"></script>
 </html>
