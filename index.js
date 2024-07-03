@@ -4,8 +4,8 @@ let tg = window.Telegram.WebApp;
 tg.expand()
 
 let user_id = `${tg.initDataUnsafe.user.id}`
-let user_name = `${tg.initDataUnsafe.first_name}`
-let user_lastname = `${tg.initDataUnsafe.last_name}`
+let user_name = `${tg.initDataUnsafe.user.first_name}`
+let user_lastname = `${tg.initDataUnsafe.user.last_name}`
 
 // FrontEnd
 
