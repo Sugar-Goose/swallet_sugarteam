@@ -3,8 +3,8 @@ let tg = window.Telegram.WebApp;
 
 tg.expand()
 
-let user_name = `${tg.initDataUnsafe.user.first_name}`
-let user_lastname = `${tg.initDataUnsafe.user.last_name}`
+let user_name = `${tg.initDataUnsafe.user.first_name}`;
+let user_lastname = `${tg.initDataUnsafe.user.last_name}`;
 
 // FrontEnd
 
