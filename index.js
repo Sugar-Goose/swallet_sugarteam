@@ -125,11 +125,11 @@ if (mainPage) {
         const user = tg.initDataUnsafe.user;
 
         if (user) {
-            document.getElementById('username').innerText = user.first_name || 'No first name';
-            document.getElementById('lastname').innerText = user.last_name || 'No last name';
+            document.getElementById('username').innerText = user.first_name || '';
+            document.getElementById('lastname').innerText = user.last_name || '';
         } else {
-            document.getElementById('username').innerText = 'User not found';
-            document.getElementById('lastname').innerText = 'User not found';
+            document.getElementById('username').innerText = '';
+            document.getElementById('lastname').innerText = '';
         }
 
     document.addEventListener('DOMContentLoaded', function() {
