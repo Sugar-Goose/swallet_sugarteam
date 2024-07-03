@@ -120,14 +120,18 @@ if (pinPage) {
 
 if (mainPage) {
 
-    let tg = window.Telegram.WebApp;
+    const tg = window.Telegram.WebApp;
 
-    tg.expand()
-    
-    let user_name = `${tg.initDataUnsafe.user.first_name}`;
-    let user_lastname = `${tg.initDataUnsafe.user.last_name}`;
+        const user = tg.initDataUnsafe.user;
 
-    
+        if (user) {
+            document.getElementById('username').innerText = user.first_name || 'No first name';
+            document.getElementById('lastname').innerText = user.last_name || 'No last name';
+        } else {
+            document.getElementById('username').innerText = 'User not found';
+            document.getElementById('lastname').innerText = 'User not found';
+        }
+
     document.addEventListener('DOMContentLoaded', function() {
         const assetsBtn = document.getElementById('assetsBtn');
         const historyBtn = document.getElementById('historyBtn');
@@ -150,13 +154,6 @@ if (mainPage) {
             historyBtn.classList.add('active');
             historyTab.classList.add('active')
         });
-
-        
-        let usernameHeader = document.getElementById('username');
-        let userLastNameHeader = document.getElementById('lastname');
-
-        usernameHeader.innerHTML = user_id;
-        userLastNameHeader.innerHTML = user_lastname;
     });
 }
 
