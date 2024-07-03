@@ -1,10 +1,10 @@
 // TELEGRAM ----------------------
-let tg = window.Telegram.WebApp;
+// let tg = window.Telegram.WebApp;
 
-tg.expand()
+// tg.expand()
 
-let user_name = `${tg.initDataUnsafe.user.first_name}`;
-let user_lastname = `${tg.initDataUnsafe.user.last_name}`;
+// let user_name = `${tg.initDataUnsafe.user.first_name}`;
+// let user_lastname = `${tg.initDataUnsafe.user.last_name}`;
 
 // FrontEnd
 
@@ -89,6 +89,14 @@ if (pinPage) {
 }
 
 if (mainPage) {
+
+    let tg = window.Telegram.WebApp;
+
+    tg.expand()
+    
+    let user_name = `${tg.initDataUnsafe.user.first_name}`;
+    let user_lastname = `${tg.initDataUnsafe.user.last_name}`;
+
     
     document.addEventListener('DOMContentLoaded', function() {
         const assetsBtn = document.getElementById('assetsBtn');
