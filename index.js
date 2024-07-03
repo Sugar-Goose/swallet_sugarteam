@@ -86,7 +86,7 @@ if (pinPage) {
                             }, 200);
                         } else {
                             if (firstPin === secondPin) {
-                                window.location.href = 'your-next-page.html'; // замените на вашу страницу
+                                window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/main_page/';
                             } else {
                                 header.textContent = 'Codes do not match. Try again';
                                 setTimeout(() => {
