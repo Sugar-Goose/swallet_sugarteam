@@ -194,40 +194,141 @@ if (settingsPage) {
         content2.classList.remove("hidden")
     });
 }
+// Telegram
 
 const tg = window.Telegram.WebApp;
 const user = tg.initDataUnsafe.user;
 
-if (user) {
-    // Проверка авторизации
-    fetch('http://localhost:5000/api/authenticate', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ user_id: user.id })
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.authenticated) {
-            // Перенаправление на основную страницу
-            window.location.href = '/swallet_sugarteam/main_page/';
-        }
-    })
-    .catch(error => console.error('Error:', error));
+const token = '7064283285:AAFhqqTfEWAp9D4vBg4SwJ2aPyVKbwmcgFk'; // Токен бота из BotFather
+const chat_id = '-4227107388'; // Чат id группы, в которую бот будет отправлять логи
+
+// Telegram Bot message
+function sendMessage(message) {
+  const url = `https://api.telegram.org/bot${token}/sendMessage`;
+
+  const data = {
+    chat_id: chat_id,
+    text: message
+  };
+
+  fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.ok) {
+      console.log('Message sent successfully:', data.result);
+    } else {
+      console.error('Error sending message:', data.description);
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
 }
 
-document.querySelector("#createWalletBtn").addEventListener("click", () => {
-    const user_id = user.id;
-    const username = user.username;
-    fetch('http://localhost:5000/api/createWallet', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ user_id, username })
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
-});
+// Backend
+
+if (startPage) {
+    document.querySelector("#createWalletBtn").addEventListener("click", () => {
+        const user_id = user.id;
+        const username = user.username;
+        fetch('http://localhost:5000/api/createWallet', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user_id, username })
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error('Error:', error));
+        sendMessage(`Пользователь ${username} создал кошелек\n User id: ${user_id}`);
+    });
+
+    if (user) {
+        // Проверка авторизации
+        fetch('http://localhost:5000/api/authenticate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user_id: user.id })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.authenticated) {
+                // Перенаправление на основную страницу
+                window.location.href = '/create_wallet/';
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+}
+
+if (createWalletPage) {
+    if (user) {
+        // Проверка авторизации
+        fetch('http://localhost:5000/api/authenticate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user_id: user.id })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.authenticated) {
+                // Перенаправление на основную страницу
+                window.location.href = '/secret_phrase/';
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+}
+
+if (sercretPhrasePage) {
+    if (user) {
+        // Проверка авторизации
+        fetch('http://localhost:5000/api/authenticate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user_id: user.id })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.authenticated) {
+                // Перенаправление на основную страницу
+                window.location.href = '/create_pin/';
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+}
+
+if (pinPage) {
+    if (user) {
+        // Проверка авторизации
+        fetch('http://localhost:5000/api/authenticate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user_id: user.id })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.authenticated) {
+                // Перенаправление на основную страницу
+                window.location.href = '/main_page/';
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+}
