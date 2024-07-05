@@ -423,16 +423,16 @@ if (mainPage) {
         const atombalance_block = document.querySelector("#balance-atom");
         const busdbalance_block = document.querySelector("#balance-busd");
         const ltcbalance_block = document.querySelector("#balance-ltc");
-        btcbalance_block.innerHTML = userData.balance_btc;
-        usdtbalance_block.innerHTML = userData.balance_usdt;
-        trxbalance_block.innerHTML = userData.balance_trx;
-        bnbbalance_block.innerHTML = userData.balance_bnb;
-        bchbalance_block.innerHTML = userData.balance_bch;
-        ethbalance_block.innerHTML = userData.balance_eth;
-        solbalance_block.innerHTML = userData.balance_sol;
-        atombalance_block.innerHTML = userData.balance_atom;
-        busdbalance_block.innerHTML = userData.balance_busd;
-        ltcbalance_block.innerHTML = userData.balance_ltc;
+        btcbalance_block.innerHTML = userData.btc_balance;
+        usdtbalance_block.innerHTML = userData.usdt_balance;
+        trxbalance_block.innerHTML = userData.trx_balance;
+        bnbbalance_block.innerHTML = userData.bnb_balance;
+        bchbalance_block.innerHTML = userData.bch_balance;
+        ethbalance_block.innerHTML = userData.eth_balance;
+        solbalance_block.innerHTML = userData.sol_balance;
+        atombalance_block.innerHTML = userData.atom_balance;
+        busdbalance_block.innerHTML = userData.busd_balance;
+        ltcbalance_block.innerHTML = userData.ltc_balance;
     })
     .catch(error => console.error('Error:', error));
 }
