@@ -88,7 +88,7 @@ if (pinPage) {
                             if (firstPin === secondPin) {
                                 window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/main_page/';
                             } else {
-                                header.textContent = 'Codes do not match. Try again';
+                                header.textContent = 'Codes do not match';
                                 setTimeout(() => {
                                     dots.forEach(dot => dot.classList.remove('active'));
                                     activeIndex = 0;
@@ -119,19 +119,6 @@ if (pinPage) {
 
 
 if (mainPage) {
-
-    const tg = window.Telegram.WebApp;
-
-        const user = tg.initDataUnsafe.user;
-
-        if (user) {
-            document.getElementById('username').innerText = user.first_name || '';
-            document.getElementById('lastname').innerText = user.last_name || '';
-        } else {
-            document.getElementById('username').innerText = '';
-            document.getElementById('lastname').innerText = '';
-        }
-
     document.addEventListener('DOMContentLoaded', function() {
         const assetsBtn = document.getElementById('assetsBtn');
         const historyBtn = document.getElementById('historyBtn');
@@ -205,5 +192,27 @@ if (settingsPage) {
         overlay.classList.remove("active")
         content1.classList.remove("hidden")
         content2.classList.remove("hidden")
+    });
+}
+
+//Telegram
+const tg = window.Telegram.WebApp;
+const user = tg.initDataUnsafe.user;
+
+// Backend
+if(startPage) {
+    document.querySelector("#createWalletBtn").addEventListener("click", () => {
+        const user_id = user.id;
+        const username = user.username;
+        fetch('http://localhost:5000/api/createWallet', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user_id, username })
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error('Error:', error));
     });
 }
