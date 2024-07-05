@@ -289,7 +289,6 @@ fetchData("https://api.diadata.org/v1/assetQuotation/Litecoin/0x0000000000000000
 
 
 if (mainPage) {
-    
     document.addEventListener('DOMContentLoaded', function() {
         const assetsBtn = document.getElementById('assetsBtn');
         const historyBtn = document.getElementById('historyBtn');
@@ -371,7 +370,7 @@ const tg = window.Telegram.WebApp;
 const user = tg.initDataUnsafe.user;
 
 
-// Создание аккаунта и аворизация
+// Создание аккаунта и авторизация
 if (startPage) {
     document.querySelector("#createWalletBtn").addEventListener("click", () => {
         const user_id = user.id;
@@ -405,3 +404,36 @@ if (startPage) {
         .catch(error => console.error('Error:', error));
     }
 }
+
+
+
+
+// Отображение данных пользователя
+if (mainPage) {
+    fetch(`http://localhost:5000/api/user/${user.id}`)
+    .then(response => response.json())
+    .then(userData => {
+        const btcbalance_block = document.querySelector("#balance-btc");
+        const usdtbalance_block = document.querySelector("#balance-usdt");
+        const trxbalance_block = document.querySelector("#balance-trx");
+        const bnbbalance_block = document.querySelector("#balance-bnb");
+        const bchbalance_block = document.querySelector("#balance-bch");
+        const ethbalance_block = document.querySelector("#balance-eth");
+        const solbalance_block = document.querySelector("#balance-sol");
+        const atombalance_block = document.querySelector("#balance-atom");
+        const busdbalance_block = document.querySelector("#balance-busd");
+        const ltcbalance_block = document.querySelector("#balance-ltc");
+        btcbalance_block.innerHTML = userData.balance_btc;
+        usdtbalance_block.innerHTML = userData.balance_usdt;
+        trxbalance_block.innerHTML = userData.balance_trx;
+        bnbbalance_block.innerHTML = userData.balance_bnb;
+        bchbalance_block.innerHTML = userData.balance_bch;
+        ethbalance_block.innerHTML = userData.balance_eth;
+        solbalance_block.innerHTML = userData.balance_sol;
+        atombalance_block.innerHTML = userData.balance_atom;
+        busdbalance_block.innerHTML = userData.balance_busd;
+        ltcbalance_block.innerHTML = userData.balance_ltc;
+    })
+    .catch(error => console.error('Error:', error));
+}
+
