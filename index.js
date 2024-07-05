@@ -9,6 +9,8 @@
 // FrontEnd
 
 const startPage = document.querySelector("#startPage");
+const createWalletPage = document.querySelector("#createWalletPage");
+const sercretPhrasePage = document.querySelector("#sercretPhrasePage");
 const pinPage = document.querySelector("#pin");
 const mainPage = document.querySelector("#main");
 const swapPage = document.querySelector("#swap");
@@ -117,15 +119,184 @@ if (pinPage) {
     });
 }
 
+// Функция для отправки запроса к API и получения данных
+function fetchData(apiUrl, successCallback, errorCallback) {
+    fetch(apiUrl, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(response => response.json())
+    .then(successCallback)
+    .catch(errorCallback);
+}
+
+// Функция для форматирования цены
+function formatPrice(price) {
+    // Форматируем цену в формат "56 343,27"
+    return price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+
+// Функция для обновления цены на странице
+function updatePrice(price, elementId) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.innerHTML = price;
+    }
+}
+
+// BTC
+let BTCprice;
+
+fetchData("https://api.diadata.org/v1/assetQuotation/Bitcoin/0x0000000000000000000000000000000000000000", 
+    function(data) {
+        BTCprice = data.Price;
+        const formattedPrice = formatPrice(BTCprice);
+        updatePrice(formattedPrice, "btcPrice");
+    },
+    function(error) {
+        console.error(error);
+    }
+);
+
+// USDT
+let USDTprice;
+
+fetchData("https://api.diadata.org/v1/assetQuotation/Ethereum/0xdAC17F958D2ee523a2206206994597C13D831ec7", 
+    function(data) {
+        USDTprice = data.Price;
+        const formattedPrice = formatPrice(USDTprice);
+        updatePrice(formattedPrice, "usdtPrice");
+    },
+    function(error) {
+        console.error(error);
+    }
+);
+
+// TRX
+let TRXprice;
+
+fetchData("https://api.diadata.org/v1/assetQuotation/Tron/0x0000000000000000000000000000000000000000", 
+    function(data) {
+        TRXprice = data.Price;
+        const formattedPrice = formatPrice(TRXprice);
+        updatePrice(formattedPrice, "trxPrice");
+    },
+    function(error) {
+        console.error(error);
+    }
+);
+
+// BNB
+let BNBprice;
+
+fetchData("https://api.diadata.org/v1/assetQuotation/BinanceSmartChain/0x0000000000000000000000000000000000000000", 
+    function(data) {
+        BNBprice = data.Price;
+        const formattedPrice = formatPrice(BNBprice);
+        updatePrice(formattedPrice, "bnbPrice");
+    },
+    function(error) {
+        console.error(error);
+    }
+);
+
+// BCH
+let BCHprice;
+
+fetchData("https://api.diadata.org/v1/assetQuotation/BitcoinCash/0x0000000000000000000000000000000000000000", 
+    function(data) {
+        BCHprice = data.Price;
+        const formattedPrice = formatPrice(BCHprice);
+        updatePrice(formattedPrice, "bchPrice");
+    },
+    function(error) {
+        console.error(error);
+    }
+);
+
+// ETH
+let ETHprice;
+
+fetchData("https://api.diadata.org/v1/assetQuotation/Ethereum/0x0000000000000000000000000000000000000000", 
+    function(data) {
+        ETHprice = data.Price;
+        const formattedPrice = formatPrice(ETHprice);
+        updatePrice(formattedPrice, "ethPrice");
+    },
+    function(error) {
+        console.error(error);
+    }
+);
+
+// SOL
+let SOLprice;
+
+fetchData("https://api.diadata.org/v1/assetQuotation/Solana/0x0000000000000000000000000000000000000000", 
+    function(data) {
+        SOLprice = data.Price;
+        const formattedPrice = formatPrice(SOLprice);
+        updatePrice(formattedPrice, "solPrice");
+    },
+    function(error) {
+        console.error(error);
+    }
+);
+
+// ATOM
+let ATOMprice;
+
+fetchData("https://api.diadata.org/v1/assetQuotation/Cosmos/0x0000000000000000000000000000000000000000", 
+    function(data) {
+        ATOMprice = data.Price;
+        const formattedPrice = formatPrice(ATOMprice);
+        updatePrice(formattedPrice, "atomPrice");
+    },
+    function(error) {
+        console.error(error);
+    }
+);
+
+// BUSD
+let BUSDprice;
+
+fetchData("https://api.diadata.org/v1/assetQuotation/BinanceSmartChain/0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56", 
+    function(data) {
+        BUSDprice = data.Price;
+        const formattedPrice = formatPrice(BUSDprice);
+        updatePrice(formattedPrice, "busdPrice");
+    },
+    function(error) {
+        console.error(error);
+    }
+);
+
+// LTC
+let LTCprice;
+
+fetchData("https://api.diadata.org/v1/assetQuotation/Litecoin/0x0000000000000000000000000000000000000000", 
+    function(data) {
+        LTCprice = data.Price;
+        const formattedPrice = formatPrice(LTCprice);
+        updatePrice(formattedPrice, "ltcPrice");
+    },
+    function(error) {
+        console.error(error);
+    }
+);
+
+
 
 if (mainPage) {
+    
     document.addEventListener('DOMContentLoaded', function() {
         const assetsBtn = document.getElementById('assetsBtn');
         const historyBtn = document.getElementById('historyBtn');
         const slider = document.getElementById('slider');
         const historyTab = document.querySelector('.history__tab');
         const assetsTab = document.querySelector(".assets");
-    
+
         assetsBtn.addEventListener('click', () => {
             slider.style.transform = 'translateX(0)';
             assetsBtn.classList.add('active');
@@ -199,40 +370,8 @@ if (settingsPage) {
 const tg = window.Telegram.WebApp;
 const user = tg.initDataUnsafe.user;
 
-const token = '7064283285:AAFhqqTfEWAp9D4vBg4SwJ2aPyVKbwmcgFk'; // Токен бота из BotFather
-const chat_id = '-4227107388'; // Чат id группы, в которую бот будет отправлять логи
 
-// Telegram Bot message
-function sendMessage(message) {
-  const url = `https://api.telegram.org/bot${token}/sendMessage`;
-
-  const data = {
-    chat_id: chat_id,
-    text: message
-  };
-
-  fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
-  .then(response => response.json())
-  .then(data => {
-    if (data.ok) {
-      console.log('Message sent successfully:', data.result);
-    } else {
-      console.error('Error sending message:', data.description);
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
-}
-
-// Backend
-
+// Создание аккаунта и аворизация
 if (startPage) {
     document.querySelector("#createWalletBtn").addEventListener("click", () => {
         const user_id = user.id;
@@ -247,11 +386,9 @@ if (startPage) {
         .then(response => response.json())
         .then(data => console.log(data))
         .catch(error => console.error('Error:', error));
-        sendMessage(`Пользователь ${username} создал кошелек\n User id: ${user_id}`);
     });
 
     if (user) {
-        // Проверка авторизации
         fetch('http://localhost:5000/api/authenticate', {
             method: 'POST',
             headers: {
@@ -262,71 +399,7 @@ if (startPage) {
         .then(response => response.json())
         .then(data => {
             if (data.authenticated) {
-                // Перенаправление на основную страницу
                 window.location.href = '/create_wallet/';
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    }
-}
-
-if (createWalletPage) {
-    if (user) {
-        // Проверка авторизации
-        fetch('http://localhost:5000/api/authenticate', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ user_id: user.id })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.authenticated) {
-                // Перенаправление на основную страницу
-                window.location.href = '/secret_phrase/';
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    }
-}
-
-if (sercretPhrasePage) {
-    if (user) {
-        // Проверка авторизации
-        fetch('http://localhost:5000/api/authenticate', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ user_id: user.id })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.authenticated) {
-                // Перенаправление на основную страницу
-                window.location.href = '/create_pin/';
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    }
-}
-
-if (pinPage) {
-    if (user) {
-        // Проверка авторизации
-        fetch('http://localhost:5000/api/authenticate', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ user_id: user.id })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.authenticated) {
-                // Перенаправление на основную страницу
-                window.location.href = '/main_page/';
             }
         })
         .catch(error => console.error('Error:', error));
