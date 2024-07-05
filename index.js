@@ -211,7 +211,7 @@ if (user) {
     .then(data => {
         if (data.authenticated) {
             // Перенаправление на основную страницу
-            window.location.href = '/main_page/';
+            window.location.href = '/swallet_sugarteam/main_page/';
         }
     })
     .catch(error => console.error('Error:', error));
