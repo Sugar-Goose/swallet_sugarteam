@@ -195,24 +195,39 @@ if (settingsPage) {
     });
 }
 
-//Telegram
 const tg = window.Telegram.WebApp;
 const user = tg.initDataUnsafe.user;
 
-// Backend
-if(startPage) {
-    document.querySelector("#createWalletBtn").addEventListener("click", () => {
-        const user_id = user.id;
-        const username = user.username;
-        fetch('http://localhost:5000/api/createWallet', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ user_id, username })
-        })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error('Error:', error));
-    });
+if (user) {
+    // Проверка авторизации
+    fetch('http://localhost:5000/api/authenticate', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ user_id: user.id })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.authenticated) {
+            // Перенаправление на основную страницу
+            window.location.href = '/main_page/';
+        }
+    })
+    .catch(error => console.error('Error:', error));
 }
+
+document.querySelector("#createWalletBtn").addEventListener("click", () => {
+    const user_id = user.id;
+    const username = user.username;
+    fetch('http://localhost:5000/api/createWallet', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ user_id, username })
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+});
