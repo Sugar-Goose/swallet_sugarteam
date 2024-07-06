@@ -384,11 +384,6 @@ if (startPage) {
             body: JSON.stringify({ user_id: user.id })
         })
         .then(response => response.json())
-        .then(data => {
-            if (data.authenticated) {
-                window.location.href = '/create_wallet/';
-            }
-        })
         .catch(error => console.error('Error:', error));
     }
 }
