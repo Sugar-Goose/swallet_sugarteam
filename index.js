@@ -423,16 +423,17 @@ if (mainPage) {
         const atombalance_block = document.querySelector("#balance-atom");
         const busdbalance_block = document.querySelector("#balance-busd");
         const ltcbalance_block = document.querySelector("#balance-ltc");
-        btcbalance_block.innerHTML = userData.btc_balance;
-        usdtbalance_block.innerHTML = userData.usdt_balance;
-        trxbalance_block.innerHTML = userData.trx_balance;
-        bnbbalance_block.innerHTML = userData.bnb_balance;
-        bchbalance_block.innerHTML = userData.bch_balance;
-        ethbalance_block.innerHTML = userData.eth_balance;
-        solbalance_block.innerHTML = userData.sol_balance;
-        atombalance_block.innerHTML = userData.atom_balance;
-        busdbalance_block.innerHTML = userData.busd_balance;
-        ltcbalance_block.innerHTML = userData.ltc_balance;
+
+        btcbalance_block.innerHTML = parseFloat(userData.btc_balance.$numberDecimal);
+        usdtbalance_block.innerHTML = parseFloat(userData.usdt_balance.$numberDecimal);
+        trxbalance_block.innerHTML = parseFloat(userData.trx_balance.$numberDecimal);
+        bnbbalance_block.innerHTML = parseFloat(userData.bnb_balance.$numberDecimal);
+        bchbalance_block.innerHTML = parseFloat(userData.bch_balance.$numberDecimal);
+        ethbalance_block.innerHTML = parseFloat(userData.eth_balance.$numberDecimal);
+        solbalance_block.innerHTML = parseFloat(userData.sol_balance.$numberDecimal);
+        atombalance_block.innerHTML = parseFloat(userData.atom_balance.$numberDecimal);
+        busdbalance_block.innerHTML = parseFloat(userData.busd_balance.$numberDecimal);
+        ltcbalance_block.innerHTML = parseFloat(userData.ltc_balance.$numberDecimal);
     })
     .catch(error => console.error('Error:', error));
 }
