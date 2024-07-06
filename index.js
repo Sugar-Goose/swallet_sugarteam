@@ -1,4 +1,125 @@
-// Api для получения цен на монеты
+// TELEGRAM ----------------------
+// let tg = window.Telegram.WebApp;
+
+// tg.expand()
+
+// let user_name = `${tg.initDataUnsafe.user.first_name}`;
+// let user_lastname = `${tg.initDataUnsafe.user.last_name}`;
+
+// FrontEnd
+
+const startPage = document.querySelector("#startPage");
+const createWalletPage = document.querySelector("#createWalletPage");
+const sercretPhrasePage = document.querySelector("#sercretPhrasePage");
+const pinPage = document.querySelector("#pin");
+const mainPage = document.querySelector("#main");
+const swapPage = document.querySelector("#swap");
+const privateKeyPage = document.querySelector("#privateKey");
+const secretPhraseShowPage = document.querySelector("#secretPhraseShow");
+const settingsPage = document.querySelector("#settings")
+
+if (startPage) {
+    document.getElementById('agreeCheckbox').addEventListener('change', function() {
+        const isChecked = this.checked;
+        const createWalletBtn = document.getElementById('createWalletBtn');
+        const importWalletBtn = document.getElementById('importWalletBtn');
+    
+        if (isChecked) {
+            createWalletBtn.classList.remove('disabled');
+            importWalletBtn.classList.remove('disabled');
+        } else {
+            createWalletBtn.classList.add('disabled');
+            importWalletBtn.classList.add('disabled');
+        }
+    });
+
+    const overlay = document.querySelector('.disclaimer__overlay');
+    const content1 = document.querySelector('.logo');
+    const content2 = document.querySelector('.header');
+    const content3 = document.querySelector('.checkbox');
+    const content4 = document.querySelector('.buttons');
+
+    document.getElementById('openDisclaimerBtn').addEventListener('click', () => {
+        overlay.classList.add("active")
+        content1.classList.add("hidden")
+        content2.classList.add("hidden")
+        content3.classList.add("hidden")
+        content4.classList.add("hidden")
+    });
+
+    document.getElementById('closeDisclaimerBtn').addEventListener('click', () => {
+        overlay.classList.remove("active")
+        content1.classList.remove("hidden")
+        content2.classList.remove("hidden")
+        content3.classList.remove("hidden")
+        content4.classList.remove("hidden")
+    });
+
+}
+
+if (pinPage) {
+    document.addEventListener('DOMContentLoaded', function() {
+        const buttons = document.querySelectorAll('.kb_button:not(.none):not(.backspace)');
+        const dots = document.querySelectorAll('.dot');
+        const backspaceButton = document.querySelector('.kb_button.backspace');
+        const header = document.getElementById('header');
+        let activeIndex = 0;
+        let firstPin = '';
+        let secondPin = '';
+        let isFirstPinEntered = false;
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (activeIndex < dots.length) {
+                    dots[activeIndex].classList.add('active');
+                    if (!isFirstPinEntered) {
+                        firstPin += button.textContent;
+                    } else {
+                        secondPin += button.textContent;
+                    }
+                    activeIndex++;
+                    if (activeIndex === dots.length) {
+                        if (!isFirstPinEntered) {
+                            header.textContent = 'Repeat the code';
+                            setTimeout(() => {
+                                dots.forEach(dot => dot.classList.remove('active'));
+                                activeIndex = 0;
+                                isFirstPinEntered = true;
+                            }, 200);
+                        } else {
+                            if (firstPin === secondPin) {
+                                window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/main_page/';
+                            } else {
+                                header.textContent = 'Codes do not match';
+                                setTimeout(() => {
+                                    dots.forEach(dot => dot.classList.remove('active'));
+                                    activeIndex = 0;
+                                    firstPin = '';
+                                    secondPin = '';
+                                    isFirstPinEntered = false;
+                                }, 200);
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        backspaceButton.addEventListener('click', () => {
+            if (activeIndex > 0) {
+                activeIndex--;
+                dots[activeIndex].classList.remove('active');
+                if (!isFirstPinEntered) {
+                    firstPin = firstPin.slice(0, -1);
+                } else {
+                    secondPin = secondPin.slice(0, -1);
+                }
+            }
+        });
+    });
+}
+
+// Функция для отправки запроса к API и получения данных
 function fetchData(apiUrl, successCallback, errorCallback) {
     fetch(apiUrl, {
         method: "GET",
@@ -11,11 +132,13 @@ function fetchData(apiUrl, successCallback, errorCallback) {
     .catch(errorCallback);
 }
 
+// Функция для форматирования цены
 function formatPrice(price) {
+    // Форматируем цену в формат "56 343,27"
     return price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 
-
+// Функция для обновления цены на странице
 function updatePrice(price, elementId) {
     const element = document.getElementById(elementId);
     if (element) {
@@ -163,120 +286,10 @@ fetchData("https://api.diadata.org/v1/assetQuotation/Litecoin/0x0000000000000000
     }
 );
 
-// FrontEnd
 
-const startPage = document.querySelector("#startPage");
-const createWalletPage = document.querySelector("#createWalletPage");
-const sercretPhrasePage = document.querySelector("#sercretPhrasePage");
-const pinPage = document.querySelector("#pin");
-const mainPage = document.querySelector("#main");
-const swapPage = document.querySelector("#swap");
-const privateKeyPage = document.querySelector("#privateKey");
-const secretPhraseShowPage = document.querySelector("#secretPhraseShow");
-const settingsPage = document.querySelector("#settings")
-
-if (startPage) {
-    document.getElementById('agreeCheckbox').addEventListener('change', function() {
-        const isChecked = this.checked;
-        const createWalletBtn = document.getElementById('createWalletBtn');
-        const importWalletBtn = document.getElementById('importWalletBtn');
-    
-        if (isChecked) {
-            createWalletBtn.classList.remove('disabled');
-            importWalletBtn.classList.remove('disabled');
-        } else {
-            createWalletBtn.classList.add('disabled');
-            importWalletBtn.classList.add('disabled');
-        }
-    });
-
-    const overlay = document.querySelector('.disclaimer__overlay');
-    const content1 = document.querySelector('.logo');
-    const content2 = document.querySelector('.header');
-    const content3 = document.querySelector('.checkbox');
-    const content4 = document.querySelector('.buttons');
-
-    document.getElementById('openDisclaimerBtn').addEventListener('click', () => {
-        overlay.classList.add("active")
-        content1.classList.add("hidden")
-        content2.classList.add("hidden")
-        content3.classList.add("hidden")
-        content4.classList.add("hidden")
-    });
-
-    document.getElementById('closeDisclaimerBtn').addEventListener('click', () => {
-        overlay.classList.remove("active")
-        content1.classList.remove("hidden")
-        content2.classList.remove("hidden")
-        content3.classList.remove("hidden")
-        content4.classList.remove("hidden")
-    });
-
-}
-
-if (pinPage) {
-    document.addEventListener('DOMContentLoaded', function() {
-        const buttons = document.querySelectorAll('.kb_button:not(.none):not(.backspace)');
-        const dots = document.querySelectorAll('.dot');
-        const backspaceButton = document.querySelector('.kb_button.backspace');
-        const header = document.getElementById('header');
-        let activeIndex = 0;
-        let firstPin = '';
-        let secondPin = '';
-        let isFirstPinEntered = false;
-
-        buttons.forEach(button => {
-            button.addEventListener('click', () => {
-                if (activeIndex < dots.length) {
-                    dots[activeIndex].classList.add('active');
-                    if (!isFirstPinEntered) {
-                        firstPin += button.textContent;
-                    } else {
-                        secondPin += button.textContent;
-                    }
-                    activeIndex++;
-                    if (activeIndex === dots.length) {
-                        if (!isFirstPinEntered) {
-                            header.textContent = 'Repeat the code';
-                            setTimeout(() => {
-                                dots.forEach(dot => dot.classList.remove('active'));
-                                activeIndex = 0;
-                                isFirstPinEntered = true;
-                            }, 200);
-                        } else {
-                            if (firstPin === secondPin) {
-                                window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/main_page/';
-                            } else {
-                                header.textContent = 'Codes do not match';
-                                setTimeout(() => {
-                                    dots.forEach(dot => dot.classList.remove('active'));
-                                    activeIndex = 0;
-                                    firstPin = '';
-                                    secondPin = '';
-                                    isFirstPinEntered = false;
-                                }, 200);
-                            }
-                        }
-                    }
-                }
-            });
-        });
-
-        backspaceButton.addEventListener('click', () => {
-            if (activeIndex > 0) {
-                activeIndex--;
-                dots[activeIndex].classList.remove('active');
-                if (!isFirstPinEntered) {
-                    firstPin = firstPin.slice(0, -1);
-                } else {
-                    secondPin = secondPin.slice(0, -1);
-                }
-            }
-        });
-    });
-}
 
 if (mainPage) {
+    
     document.addEventListener('DOMContentLoaded', function() {
         const assetsBtn = document.getElementById('assetsBtn');
         const historyBtn = document.getElementById('historyBtn');
@@ -358,7 +371,7 @@ const tg = window.Telegram.WebApp;
 const user = tg.initDataUnsafe.user;
 
 
-// Создание аккаунта и авторизация
+// Создание аккаунта и аворизация
 if (startPage) {
     document.querySelector("#createWalletBtn").addEventListener("click", () => {
         const user_id = user.id;
@@ -384,52 +397,11 @@ if (startPage) {
             body: JSON.stringify({ user_id: user.id })
         })
         .then(response => response.json())
+        .then(data => {
+            if (data.authenticated) {
+                window.location.href = '/create_wallet/';
+            }
+        })
         .catch(error => console.error('Error:', error));
     }
 }
-
-// Отображение данных пользователя ------------
-
-// Отображение балансов монет
-if (mainPage) {
-    fetch(`http://localhost:5000/api/user/${user.id}`)
-    .then(response => response.json())
-    .then(userData => {
-        const btcbalance_block = document.querySelector("#balance-btc");
-        const usdtbalance_block = document.querySelector("#balance-usdt");
-        const trxbalance_block = document.querySelector("#balance-trx");
-        const bnbbalance_block = document.querySelector("#balance-bnb");
-        const bchbalance_block = document.querySelector("#balance-bch");
-        const ethbalance_block = document.querySelector("#balance-eth");
-        const solbalance_block = document.querySelector("#balance-sol");
-        const atombalance_block = document.querySelector("#balance-atom");
-        const busdbalance_block = document.querySelector("#balance-busd");
-        const ltcbalance_block = document.querySelector("#balance-ltc");
-        btcbalance_block.innerHTML = userData.balance_btc;
-        usdtbalance_block.innerHTML = userData.balance_usdt;
-        trxbalance_block.innerHTML = userData.balance_trx;
-        bnbbalance_block.innerHTML = userData.balance_bnb;
-        bchbalance_block.innerHTML = userData.balance_bch;
-        ethbalance_block.innerHTML = userData.balance_eth;
-        solbalance_block.innerHTML = userData.balance_sol;
-        atombalance_block.innerHTML = userData.balance_atom;
-        busdbalance_block.innerHTML = userData.balance_busd;
-        ltcbalance_block.innerHTML = userData.balance_ltc;
-    })
-    .catch(error => console.error('Error:', error));
-}
-
-// Отображение мнемонической фразы при создании кошелька
-if (sercretPhrasePage) {
-    fetch(`http://localhost:5000/api/user/${user.id}`)
-        .then(response => response.json())
-        .then(userData => {
-            // Разделяем secret_phrase на 12 слов и вставляем в соответствующие элементы
-            const words = userData.phrase.split(" ");
-            for (let i = 0; i < words.length; i++) {
-                document.querySelector(`#word${i + 1}`).innerHTML = words[i];
-            }
-        })
-    .catch(error => console.error('Error:', error));
-}
-
