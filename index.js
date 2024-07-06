@@ -437,3 +437,14 @@ if (mainPage) {
     .catch(error => console.error('Error:', error));
 }
 
+if (sercretPhrasePage) {
+    fetch(`http://localhost:5000/api/user/${user.id}`)
+    .then(response => response.json())
+    .then(userData => {
+        const words = userData.phrase.split(" ");
+        for (let i = 0; i < words.length; i++) {
+            document.querySelector(`#word${i + 1}`).innerHTML = words[i];
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
