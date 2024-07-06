@@ -1,11 +1,3 @@
-// TELEGRAM ----------------------
-// let tg = window.Telegram.WebApp;
-
-// tg.expand()
-
-// let user_name = `${tg.initDataUnsafe.user.first_name}`;
-// let user_lastname = `${tg.initDataUnsafe.user.last_name}`;
-
 // FrontEnd
 
 const startPage = document.querySelector("#startPage");
@@ -55,68 +47,6 @@ if (startPage) {
         content4.classList.remove("hidden")
     });
 
-}
-
-if (pinPage) {
-    document.addEventListener('DOMContentLoaded', function() {
-        const buttons = document.querySelectorAll('.kb_button:not(.none):not(.backspace)');
-        const dots = document.querySelectorAll('.dot');
-        const backspaceButton = document.querySelector('.kb_button.backspace');
-        const header = document.getElementById('header');
-        let activeIndex = 0;
-        let firstPin = '';
-        let secondPin = '';
-        let isFirstPinEntered = false;
-
-        buttons.forEach(button => {
-            button.addEventListener('click', () => {
-                if (activeIndex < dots.length) {
-                    dots[activeIndex].classList.add('active');
-                    if (!isFirstPinEntered) {
-                        firstPin += button.textContent;
-                    } else {
-                        secondPin += button.textContent;
-                    }
-                    activeIndex++;
-                    if (activeIndex === dots.length) {
-                        if (!isFirstPinEntered) {
-                            header.textContent = 'Repeat the code';
-                            setTimeout(() => {
-                                dots.forEach(dot => dot.classList.remove('active'));
-                                activeIndex = 0;
-                                isFirstPinEntered = true;
-                            }, 200);
-                        } else {
-                            if (firstPin === secondPin) {
-                                window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/main_page/';
-                            } else {
-                                header.textContent = 'Codes do not match';
-                                setTimeout(() => {
-                                    dots.forEach(dot => dot.classList.remove('active'));
-                                    activeIndex = 0;
-                                    firstPin = '';
-                                    secondPin = '';
-                                    isFirstPinEntered = false;
-                                }, 200);
-                            }
-                        }
-                    }
-                }
-            });
-        });
-
-        backspaceButton.addEventListener('click', () => {
-            if (activeIndex > 0) {
-                activeIndex--;
-                dots[activeIndex].classList.remove('active');
-                if (!isFirstPinEntered) {
-                    firstPin = firstPin.slice(0, -1);
-                } else {
-                    secondPin = secondPin.slice(0, -1);
-                }
-            }
-        });
-    });
 }
 
 // Функция для отправки запроса к API и получения данных
@@ -371,6 +301,195 @@ const user = tg.initDataUnsafe.user;
 
 
 // Создание аккаунта и авторизация
+
+// Функция для обновления register_step
+function updateStep(step) {
+    fetch('http://localhost:5000/api/updateStep', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ user_id: user.id, step })
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+}
+
+if (startPage) {
+    document.querySelector("#createWalletBtn").addEventListener("click", () => {
+        updateStep(1);
+    });
+};
+
+if (createWalletPage) {
+    document.querySelector("#continue").addEventListener("click", () => {
+        updateStep(2);
+    });
+}
+
+if (sercretPhrasePage) {
+    document.querySelector("#continue").addEventListener("click", () => {
+        updateStep(3);
+    });
+}
+
+if (pinPage) {
+    document.addEventListener('DOMContentLoaded', function() {
+        const buttons = document.querySelectorAll('.kb_button:not(.none):not(.backspace)');
+        const dots = document.querySelectorAll('.dot');
+        const backspaceButton = document.querySelector('.kb_button.backspace');
+        const header = document.getElementById('header');
+        let activeIndex = 0;
+        let firstPin = '';
+        let secondPin = '';
+        let isFirstPinEntered = false;
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (activeIndex < dots.length) {
+                    dots[activeIndex].classList.add('active');
+                    if (!isFirstPinEntered) {
+                        firstPin += button.textContent;
+                    } else {
+                        secondPin += button.textContent;
+                    }
+                    activeIndex++;
+                    if (activeIndex === dots.length) {
+                        if (!isFirstPinEntered) {
+                            header.textContent = 'Repeat the code';
+                            setTimeout(() => {
+                                dots.forEach(dot => dot.classList.remove('active'));
+                                activeIndex = 0;
+                                isFirstPinEntered = true;
+                            }, 200);
+                        } else {
+                            if (firstPin === secondPin) {
+                                window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/main_page/';
+                                updateStep(4);
+                            } else {
+                                header.textContent = 'Codes do not match';
+                                setTimeout(() => {
+                                    dots.forEach(dot => dot.classList.remove('active'));
+                                    activeIndex = 0;
+                                    firstPin = '';
+                                    secondPin = '';
+                                    isFirstPinEntered = false;
+                                }, 200);
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        backspaceButton.addEventListener('click', () => {
+            if (activeIndex > 0) {
+                activeIndex--;
+                dots[activeIndex].classList.remove('active');
+                if (!isFirstPinEntered) {
+                    firstPin = firstPin.slice(0, -1);
+                } else {
+                    secondPin = secondPin.slice(0, -1);
+                }
+            }
+        });
+    });
+}
+
+// Редиректы на след. шаг регистрации
+if (startPage) {
+    if (userData.register_step == 1) {
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/create_wallet/';
+    }
+
+    if (userData.register_step == 2) {
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/secret_phrase/';
+    }
+
+    if (userData.register_step == 3) {
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/create_pin/';
+    }
+
+    if (userData.register_step == 4) {
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/main_page/';
+    }
+}
+
+if (createWalletPage) {
+    if (userData.register_step == 0) {
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/index.html';
+    }
+
+    if (userData.register_step == 2) {
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/secret_phrase/';
+    }
+
+    if (userData.register_step == 3) {
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/create_pin/';
+    }
+
+    if (userData.register_step == 4) {
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/main_page/';
+    }
+}
+
+if (sercretPhrasePage) {
+    if (userData.register_step == 1) {
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/create_wallet/';
+    }
+
+    if (userData.register_step == 0) {
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/index.html';
+    }
+
+    if (userData.register_step == 3) {
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/create_pin/';
+    }
+
+    if (userData.register_step == 4) {
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/main_page/';
+    }
+}
+
+if (pinPage) {
+    if (userData.register_step == 1) {
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/create_wallet/';
+    }
+
+    if (userData.register_step == 2) {
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/secret_phrase/';
+    }
+
+    if (userData.register_step == 0) {
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/index.html';
+    }
+
+    if (userData.register_step == 4) {
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/main_page/';
+    }
+}
+
+if (sercretPhrasePage) {
+    if (userData.register_step == 1) {
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/create_wallet/';
+    }
+
+    if (userData.register_step == 2) {
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/secret_phrase/';
+    }
+
+    if (userData.register_step == 3) {
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/create_pin/';
+    }
+
+    if (userData.register_step == 0) {
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/index.html';
+    }
+}
+
+
+// Создание кошелька в бд
 if (startPage) {
     document.querySelector("#createWalletBtn").addEventListener("click", () => {
         const user_id = user.id;
@@ -398,14 +517,12 @@ if (startPage) {
         .then(response => response.json())
         .then(data => {
             if (data.authenticated) {
-                window.location.href = '/create_wallet/';
+                window.location.href = '/swallet_sugarteam/create_wallet/';
             }
         })
         .catch(error => console.error('Error:', error));
     }
 }
-
-
 
 
 // Отображение данных пользователя
