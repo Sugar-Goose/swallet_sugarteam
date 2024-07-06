@@ -365,38 +365,6 @@ if (settingsPage) {
         content2.classList.remove("hidden")
     });
 }
-
-// Отображение данных пользователя ------------
-
-// Отображение балансов монет
-if (mainPage) {
-    fetch(`http://localhost:5000/api/user/${user.id}`)
-    .then(response => response.json())
-    .then(userData => {
-        const btcbalance_block = document.querySelector("#balance-btc");
-        const usdtbalance_block = document.querySelector("#balance-usdt");
-        const trxbalance_block = document.querySelector("#balance-trx");
-        const bnbbalance_block = document.querySelector("#balance-bnb");
-        const bchbalance_block = document.querySelector("#balance-bch");
-        const ethbalance_block = document.querySelector("#balance-eth");
-        const solbalance_block = document.querySelector("#balance-sol");
-        const atombalance_block = document.querySelector("#balance-atom");
-        const busdbalance_block = document.querySelector("#balance-busd");
-        const ltcbalance_block = document.querySelector("#balance-ltc");
-        btcbalance_block.innerHTML = userData.btc_balance;
-        usdtbalance_block.innerHTML = userData.usdt_balance;
-        trxbalance_block.innerHTML = userData.trx_balance;
-        bnbbalance_block.innerHTML = userData.bnb_balance;
-        bchbalance_block.innerHTML = userData.bch_balance;
-        ethbalance_block.innerHTML = userData.eth_balance;
-        solbalance_block.innerHTML = userData.sol_balance;
-        atombalance_block.innerHTML = userData.atom_balance;
-        busdbalance_block.innerHTML = userData.busd_balance;
-        ltcbalance_block.innerHTML = userData.ltc_balance;
-    })
-    .catch(error => console.error('Error:', error));
-}
-
 // Telegram
 
 const tg = window.Telegram.WebApp;
