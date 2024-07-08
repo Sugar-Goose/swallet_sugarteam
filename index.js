@@ -460,26 +460,27 @@ if (mainPage) {
         atombalance_block.innerHTML = parseFloat(userData.atom_balance.$numberDecimal);
         busdbalance_block.innerHTML = parseFloat(userData.busd_balance.$numberDecimal);
         ltcbalance_block.innerHTML = parseFloat(userData.ltc_balance.$numberDecimal);
+        // Отображение всего баланса в долларах
+        let usdBTC_balance = BTCprice * parseFloat(userData.btc_balance.$numberDecimal);
+        let usdUSDT_balance = USDTprice * parseFloat(userData.usdt_balance.$numberDecimal);
+        let usdTRX_balance = TRXprice * parseFloat(userData.trx_balance.$numberDecimal);
+        let usdBNB_balance = BNBprice * parseFloat(userData.bnb_balance.$numberDecimal);
+        let usdBCH_balance = BCHprice * parseFloat(userData.bch_balance.$numberDecimal);
+        let usdETH_balance = ETHprice * parseFloat(userData.eth_balance.$numberDecimal);
+        let usdSOL_balance = SOLprice * parseFloat(userData.sol_balance.$numberDecimal);
+        let usdATOM_balance = ATOMprice * parseFloat(userData.atom_balance.$numberDecimal);
+        let usdBUSD_balance = BUSDprice * parseFloat(userData.busd_balance.$numberDecimal);
+        let usdLTC_balance = LTCprice * parseFloat(userData.ltc_balance.$numberDecimal);
+
+        let total_bal = usdBTC_balance + usdUSDT_balance + usdTRX_balance + usdBNB_balance + usdBCH_balance + usdETH_balance + usdSOL_balance + usdATOM_balance + usdBUSD_balance + usdLTC_balance;
+        let TOTALBALANCE = formatPrice(total_bal)
+
+        document.querySelector("#totalBalance").innerHTML = TOTALBALANCE;
     })
     .catch(error => console.error('Error:', error));
 }
 
-let usdBTC_balance = BTCprice * parseFloat(userData.btc_balance.$numberDecimal);
-let usdUSDT_balance = USDTprice * parseFloat(userData.usdt_balance.$numberDecimal);
-let usdTRX_balance = TRXprice * parseFloat(userData.trx_balance.$numberDecimal);
-let usdBNB_balance = BNBprice * parseFloat(userData.bnb_balance.$numberDecimal);
-let usdBCH_balance = BCHprice * parseFloat(userData.bch_balance.$numberDecimal);
-let usdETH_balance = ETHprice * parseFloat(userData.eth_balance.$numberDecimal);
-let usdSOL_balance = SOLprice * parseFloat(userData.sol_balance.$numberDecimal);
-let usdATOM_balance = ATOMprice * parseFloat(userData.atom_balance.$numberDecimal);
-let usdBUSD_balance = BUSDprice * parseFloat(userData.busd_balance.$numberDecimal);
-let usdLTC_balance = LTCprice * parseFloat(userData.ltc_balance.$numberDecimal);
 
-let total_bal = usdBTC_balance + usdTRX_balance + usdBNB_balance + usdBCH_balance + usdETH_balance + usdSOL_balance + usdATOM_balance + usdBUSD_balance + usdLTC_balance;
-let TOTALBALANCE = formatPrice(total_bal)
-if (mainPage) {
-    document.querySelector("#totalBalance").innerHTML = TOTALBALANCE;
-}
 
 // Отображение секретной фразы при регистрации
 if (sercretPhrasePage) {
