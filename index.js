@@ -316,24 +316,6 @@ function updateStep(step) {
     .catch(error => console.error('Error:', error));
 }
 
-if (startPage) {
-    document.querySelector("#createWalletBtn").addEventListener("click", () => {
-        updateStep(1);
-    });
-};
-
-if (createWalletPage) {
-    document.querySelector("#continue").addEventListener("click", () => {
-        updateStep(2);
-    });
-}
-
-if (sercretPhrasePage) {
-    document.querySelector("#continue").addEventListener("click", () => {
-        updateStep(3);
-    });
-}
-
 if (pinPage) {
     document.addEventListener('DOMContentLoaded', function() {
         const buttons = document.querySelectorAll('.kb_button:not(.none):not(.backspace)');
@@ -366,7 +348,7 @@ if (pinPage) {
                         } else {
                             if (firstPin === secondPin) {
                                 window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/main_page/';
-                                updateStep(4);
+                                updateStep(1);
                             } else {
                                 header.textContent = 'Codes do not match';
                                 setTimeout(() => {
