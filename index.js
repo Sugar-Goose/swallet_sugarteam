@@ -132,6 +132,10 @@ if (settingsPage) {
         updateStep(0);
         window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/';
     });
+
+    document.querySelector("#supportButton").addEventListener("click", () => {
+        window.location.href = 'https://t.me/swallet_support_bot';
+    });
 }
 
 // Create PIN Code and Save to Database
