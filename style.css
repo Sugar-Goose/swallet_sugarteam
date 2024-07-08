@@ -440,6 +440,7 @@ hr {
     display: flex;
     justify-content: space-around;
     background-color: rgba(45, 56, 68, 0.7);
+    z-index: 1000000;
 }
 
 .menu__button {
@@ -536,4 +537,23 @@ hr {
 
 .assets.hidden, .bottom__menu.hidden {
     display: none;
+}
+
+.swap__overlay {
+    position: fixed;
+    top:0;
+    left:0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translate(0, -10%);
+    z-index: 1000;
+    background-color: rgba(0,0,0, 0.5);
+}
+
+.swap__button__ {
+    z-index: -1;
 }
