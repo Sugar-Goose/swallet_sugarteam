@@ -128,6 +128,15 @@ if (startPage) {
 }
 
 if (settingsPage) {
+    let disclaimer__overlay = document.querySelector(".disclaimer__overlay");
+    document.querySelector("#openDisclaimerBtn").addEventListener("click", () => {
+        disclaimer__overlay.classList.add("active");
+    });
+
+    document.querySelector("#closeDisclaimerBtn").addEventListener("click", () => {
+        disclaimer__overlay.classList.remove("active");
+    });
+
     document.querySelector("#logout-button").addEventListener("click", () => {
         updateStep(0);
         window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/';
