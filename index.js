@@ -129,12 +129,15 @@ if (startPage) {
 
 if (settingsPage) {
     let disclaimer__overlay = document.querySelector(".disclaimer__overlay");
+    let assets = document.querySelector(".assets");
     document.querySelector("#openDisclaimerBtn").addEventListener("click", () => {
         disclaimer__overlay.classList.add("active");
+        assets.classList.remove("active");
     });
 
     document.querySelector("#closeDisclaimerBtn").addEventListener("click", () => {
         disclaimer__overlay.classList.remove("active");
+        assets.classList.add("active");
     });
 
     document.querySelector("#logout-button").addEventListener("click", () => {
