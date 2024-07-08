@@ -477,8 +477,9 @@ let usdLTC_balance = LTCprice * parseFloat(userData.ltc_balance.$numberDecimal);
 
 let total_bal = usdBTC_balance + usdTRX_balance + usdBNB_balance + usdBCH_balance + usdETH_balance + usdSOL_balance + usdATOM_balance + usdBUSD_balance + usdLTC_balance;
 let TOTALBALANCE = formatPrice(total_bal)
-
-document.querySelector("#totalBalance").innerHTML = TOTALBALANCE;
+if (mainPage) {
+    document.querySelector("#totalBalance").innerHTML = TOTALBALANCE;
+}
 
 // Отображение секретной фразы при регистрации
 if (sercretPhrasePage) {
