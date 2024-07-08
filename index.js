@@ -299,6 +299,10 @@ if (mainPage) {
                     document.getElementById('usd-atom-balance').innerHTML = atomInUsd.toFixed(2);
                     document.getElementById('usd-busd-balance').innerHTML = busdInUsd.toFixed(2);
                     document.getElementById('usd-ltc-balance').innerHTML = ltcInUsd.toFixed(2);
+
+                    let TOTALBALANCE = btcInUsd + usdtInUsd + trxInUsd + bnbInUsd + bchInUsd + ethInUsd + solInUsd + busdInUsd + atomInUsd + ltcInUsd;
+
+                    document.getElementById('totalBalance').innerHTML = TOTALBALANCE.toFixed(2);
                 })
                 .catch(error => console.error('Error fetching prices:', error));
         })
