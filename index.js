@@ -247,11 +247,24 @@ if (mainPage) {
         };
 
         Object.keys(balances).forEach(key => {
-            const element = document.getElementById(key + 'Balance');
+            const element = document.getElementById('balance-' + key);
             if (element) {
                 element.innerHTML = balances[key];
             }
         });
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+// Отображение секретной фразы при регистрации
+if (sercretPhrasePage) {
+    fetch(`http://localhost:5000/api/user/${user.id}`)
+    .then(response => response.json())
+    .then(userData => {
+        const words = userData.phrase.split(" ");
+        for (let i = 0; i < words.length; i++) {
+            document.querySelector(`#word${i + 1}`).innerHTML = words[i];
+        }
     })
     .catch(error => console.error('Error:', error));
 }
