@@ -390,6 +390,10 @@ body {
     font-weight: 400;
 }
 
+.rightrow h3, .rightrow h4 {
+    text-align: left;
+}
+
 .leftrow__text h3, .rightrow h3 {
     margin-bottom: 0px;
 }
