@@ -300,7 +300,8 @@ if (mainPage) {
                     document.getElementById('usd-busd-balance').innerHTML = busdInUsd.toFixed(2);
                     document.getElementById('usd-ltc-balance').innerHTML = ltcInUsd.toFixed(2);
 
-                    let TOTALBALANCE = btcInUsd + usdtInUsd + trxInUsd + bnbInUsd + bchInUsd + ethInUsd + solInUsd + busdInUsd + atomInUsd + ltcInUsd;
+                    let total_bal = btcInUsd + usdtInUsd + trxInUsd + bnbInUsd + bchInUsd + ethInUsd + solInUsd + busdInUsd + atomInUsd + ltcInUsd;
+                    let TOTALBALANCE = formatPrice(total_bal);
 
                     document.getElementById('totalBalance').innerHTML = TOTALBALANCE.toFixed(2);
                 })
