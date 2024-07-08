@@ -470,3 +470,10 @@ if (startPage) {
     })
     .catch(error => console.error('Error:', error));
 }
+
+if (settingsPage) {
+    document.querySelector("#logout-button").addEventListener("click", () => {
+        updateStep(0);
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/';
+    });
+}
