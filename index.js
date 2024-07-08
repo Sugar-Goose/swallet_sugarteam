@@ -259,6 +259,13 @@ if (mainPage) {
                 ltc: parseFloat(userData.ltc_balance.$numberDecimal)
             };
 
+            Object.keys(balances).forEach(key => {
+                const element = document.getElementById('balance-' + key);
+                if (element) {
+                    element.innerHTML = balances[key];
+                }
+            });
+
             const pricePromises = Object.keys(prices).map(key => 
                 fetch(prices[key]).then(response => response.json())
             );
@@ -282,16 +289,16 @@ if (mainPage) {
                     const busdInUsd = balances.busd * pricesInUsd.busd;
                     const ltcInUsd = balances.ltc * pricesInUsd.ltc;
 
-                    document.getElementById('btcBalance').innerHTML = btcInUsd.toFixed(2);
-                    document.getElementById('usdtBalance').innerHTML = usdtInUsd.toFixed(2);
-                    document.getElementById('trxBalance').innerHTML = trxInUsd.toFixed(2);
-                    document.getElementById('bnbBalance').innerHTML = bnbInUsd.toFixed(2);
-                    document.getElementById('bchBalance').innerHTML = bchInUsd.toFixed(2);
-                    document.getElementById('ethBalance').innerHTML = ethInUsd.toFixed(2);
-                    document.getElementById('solBalance').innerHTML = solInUsd.toFixed(2);
-                    document.getElementById('atomBalance').innerHTML = atomInUsd.toFixed(2);
-                    document.getElementById('busdBalance').innerHTML = busdInUsd.toFixed(2);
-                    document.getElementById('ltcBalance').innerHTML = ltcInUsd.toFixed(2);
+                    document.getElementById('usd-btc-balance').innerHTML = btcInUsd.toFixed(2);
+                    document.getElementById('usd-usdt-balance').innerHTML = usdtInUsd.toFixed(2);
+                    document.getElementById('usd-trx-balance').innerHTML = trxInUsd.toFixed(2);
+                    document.getElementById('usd-bnb-balance').innerHTML = bnbInUsd.toFixed(2);
+                    document.getElementById('usd-bch-balance').innerHTML = bchInUsd.toFixed(2);
+                    document.getElementById('usd-eth-balance').innerHTML = ethInUsd.toFixed(2);
+                    document.getElementById('usd-sol-balance').innerHTML = solInUsd.toFixed(2);
+                    document.getElementById('usd-atom-balance').innerHTML = atomInUsd.toFixed(2);
+                    document.getElementById('usd-busd-balance').innerHTML = busdInUsd.toFixed(2);
+                    document.getElementById('usd-ltc-balance').innerHTML = ltcInUsd.toFixed(2);
                 })
                 .catch(error => console.error('Error fetching prices:', error));
         })
