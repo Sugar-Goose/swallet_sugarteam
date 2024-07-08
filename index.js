@@ -335,6 +335,7 @@ if (settingsPage) {
     });
 }
 
+// Создание пин кода, и его запись в базу
 if (pinPage) {
     document.addEventListener('DOMContentLoaded', function() {
         const buttons = document.querySelectorAll('.kb_button:not(.none):not(.backspace)');
@@ -366,8 +367,20 @@ if (pinPage) {
                             }, 200);
                         } else {
                             if (firstPin === secondPin) {
-                                window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/main_page/';
-                                updateStep(1);
+                                fetch('http://localhost:5000/api/updatePin', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({ user_id: user.id, pin: firstPin })
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    console.log(data);
+                                    updateStep(1);
+                                    window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/main_page/';
+                                })
+                                .catch(error => console.error('Error:', error));
                             } else {
                                 header.textContent = 'Codes do not match';
                                 setTimeout(() => {
