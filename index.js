@@ -252,6 +252,11 @@ if (mainPage) {
                 element.innerHTML = balances[key];
             }
         });
+
+        let total_bal = usdBTC_balance + usdUSDT_balance + usdTRX_balance + usdBNB_balance + usdBCH_balance + usdETH_balance + usdSOL_balance + usdATOM_balance + usdBUSD_balance + usdLTC_balance;
+        let TOTALBALANCE = formatPrice(total_bal);
+
+        document.querySelector("#totalBalance").innerHTML = TOTALBALANCE;
     })
     .catch(error => console.error('Error:', error));
 }
