@@ -306,6 +306,10 @@ if (mainPage) {
                 .catch(error => console.error('Error fetching prices:', error));
         })
         .catch(error => console.error('Error fetching user data:', error));
+    
+    document.getElementById('refreshButton').addEventListener('click', () => {
+        location.reload();
+    });
 }
 
 
