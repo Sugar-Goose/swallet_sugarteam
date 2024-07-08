@@ -316,6 +316,25 @@ function updateStep(step) {
     .catch(error => console.error('Error:', error));
 }
 
+// Проверка логина, и логаут
+if (startPage) {
+    fetch(`http://localhost:5000/api/user/${user.id}`)
+    .then(response => response.json())
+    .then(userData => {
+        if (userData.register_step == 1) {
+            window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/main_page/';
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+if (settingsPage) {
+    document.querySelector("#logout-button").addEventListener("click", () => {
+        updateStep(0);
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/';
+    });
+}
+
 if (pinPage) {
     document.addEventListener('DOMContentLoaded', function() {
         const buttons = document.querySelectorAll('.kb_button:not(.none):not(.backspace)');
@@ -397,27 +416,12 @@ if (startPage) {
         .then(data => console.log(data))
         .catch(error => console.error('Error:', error));
     });
-
-    if (user) {
-        fetch('http://localhost:5000/api/authenticate', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ user_id: user.id })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.authenticated) {
-                window.location.href = '/swallet_sugarteam/create_wallet/';
-            }
-        })
-        .catch(error => console.error('Error:', error));
-    }
 }
 
 
-// Отображение данных пользователя
+// Отображение данных пользователя -------------------
+
+// Отображение балансов монет
 if (mainPage) {
     fetch(`http://localhost:5000/api/user/${user.id}`)
     .then(response => response.json())
@@ -447,6 +451,7 @@ if (mainPage) {
     .catch(error => console.error('Error:', error));
 }
 
+// Отображение секретной фразы при регистрации
 if (sercretPhrasePage) {
     fetch(`http://localhost:5000/api/user/${user.id}`)
     .then(response => response.json())
@@ -457,23 +462,4 @@ if (sercretPhrasePage) {
         }
     })
     .catch(error => console.error('Error:', error));
-}
-
-// Редиректы на след. шаг регистрации
-if (startPage) {
-    fetch(`http://localhost:5000/api/user/${user.id}`)
-    .then(response => response.json())
-    .then(userData => {
-        if (userData.register_step == 1) {
-            window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/main_page/';
-        }
-    })
-    .catch(error => console.error('Error:', error));
-}
-
-if (settingsPage) {
-    document.querySelector("#logout-button").addEventListener("click", () => {
-        updateStep(0);
-        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/';
-    });
 }
