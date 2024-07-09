@@ -31,19 +31,19 @@ if (startPage) {
     const content4 = document.querySelector('.buttons');
 
     document.getElementById('openDisclaimerBtn').addEventListener('click', () => {
-        overlay.classList.add("active")
-        content1.classList.add("hidden")
-        content2.classList.add("hidden")
-        content3.classList.add("hidden")
-        content4.classList.add("hidden")
+        overlay.classList.add("active");
+        content1.classList.add("hidden");
+        content2.classList.add("hidden");
+        content3.classList.add("hidden");
+        content4.classList.add("hidden");
     });
 
     document.getElementById('closeDisclaimerBtn').addEventListener('click', () => {
-        overlay.classList.remove("active")
-        content1.classList.remove("hidden")
-        content2.classList.remove("hidden")
-        content3.classList.remove("hidden")
-        content4.classList.remove("hidden")
+        overlay.classList.remove("active");
+        content1.classList.remove("hidden");
+        content2.classList.remove("hidden");
+        content3.classList.remove("hidden");
+        content4.classList.remove("hidden");
     });
 
 }
@@ -69,7 +69,7 @@ if (mainPage) {
             assetsBtn.classList.remove('active');
             assetsTab.classList.remove('active');
             historyBtn.classList.add('active');
-            historyTab.classList.add('active')
+            historyTab.classList.add('active');
         });
 
         
@@ -129,6 +129,18 @@ if (settingsPage) {
         overlay.classList.remove("active")
         content1.classList.remove("hidden")
         content2.classList.remove("hidden")
+    });
+
+    document.getElementById('supportButton').addEventListener('click', () => {
+        window.location.href = 'https://t.me/swallet_support_bot';
+    });
+
+    document.getElementById('showPhraseButton').addEventListener('click', () => {
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/show_phrase/';
+    });
+
+    document.getElementById('showKeyButton').addEventListener('click', () => {
+        window.location.href = 'https://sugar-goose.github.io/swallet_sugarteam/show_key/';
     });
 }
 
@@ -457,6 +469,18 @@ if (secretPhraseShowPage) {
         for (let i = 0; i < words.length; i++) {
             document.querySelector(`#word${i + 1}`).innerHTML = words[i];
         }
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+// Отображение приватного ключа на странице ключа
+if (privateKeyPage) {
+    fetch(`http://localhost:5000/api/user/${user.id}`)
+    .then(response => response.json())
+    .then(userData => {
+        const secretKey = userData.key;
+        const keyarea = document.querySelector("#privateKeyText");
+        keyarea.innerHTML = secretKey;
     })
     .catch(error => console.error('Error:', error));
 }
