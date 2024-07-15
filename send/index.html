@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" id="sendPage">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send crypto</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <section class="select_currecy_popup">
+        <h2 class="select_currecy_popup_h2">Select crypto to send</h2>
+        <div class="asset" data-crypto="BTC" data-image="../assets/crypto_icons/btc.png" data-price-id="btcPrice">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/btc.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>BTC</h3>
+                    <h4>$<span id="btcPrice">0.00</span></h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3 id="balance-btc">0</h3>
+                <h4>$<span id="usd-btc-balance"></span></h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset" data-crypto="USDT" data-image="../assets/crypto_icons/usdt.png" data-price-id="usdtPrice">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/usdt.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>USDT</h3>
+                    <h4>$<span id="usdtPrice">0.00</span></h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3 id="balance-usdt">0</h3>
+                <h4>$<span id="usd-usdt-balance"></span></h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset" data-crypto="TRX" data-image="../assets/crypto_icons/trx.png" data-price-id="trxPrice">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/trx.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>TRX</h3>
+                    <h4>$<span id="trxPrice">0.00</span></h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3 id="balance-trx">0</h3>
+                <h4>$<span id="usd-trx-balance"></span></h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset" data-crypto="BNB" data-image="../assets/crypto_icons/bnb.png" data-price-id="bnbPrice">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/bnb.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>BNB</h3>
+                    <h4>$<span id="bnbPrice">0.00</span></h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3 id="balance-bnb">0</h3>
+                <h4>$<span id="usd-bnb-balance"></span></h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset" data-crypto="BCH" data-image="../assets/crypto_icons/bch.png" data-price-id="bchPrice">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/bch.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>BCH</h3>
+                    <h4>$<span id="bchPrice">0.00</span></h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3 id="balance-bch">0</h3>
+                <h4>$<span id="usd-bch-balance"></span></h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset" data-crypto="ETH" data-image="../assets/crypto_icons/eth.png" data-price-id="ethPrice">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/eth.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>ETH</h3>
+                    <h4>$<span id="ethPrice">0.00</span></h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3 id="balance-eth">0</h3>
+                <h4>$<span id="usd-eth-balance"></span></h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset" data-crypto="SOL" data-image="../assets/crypto_icons/sol.png" data-price-id="solPrice">
+            <div class="leftrow">
+                <img class="sol_img" src="../assets/crypto_icons/sol.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>SOL</h3>
+                    <h4>$<span id="solPrice">0.00</span></h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3 id="balance-sol">0</h3>
+                <h4>$<span id="usd-sol-balance"></span></h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset" data-crypto="ATOM" data-image="../assets/crypto_icons/atom.png" data-price-id="atomPrice">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/atom.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>ATOM</h3>
+                    <h4>$<span id="atomPrice">0.00</span></h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3 id="balance-atom">0</h3>
+                <h4>$<span id="usd-atom-balance"></span></h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset" data-crypto="BUSD" data-image="../assets/crypto_icons/busd.png" data-price-id="busdPrice">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/busd.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>BUSD</h3>
+                    <h4>$<span id="busdPrice">0.00</span></h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3 id="balance-busd">0</h3>
+                <h4>$<span id="usd-busd-balance"></span></h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset" data-crypto="LTC" data-image="../assets/crypto_icons/ltc.png" data-price-id="ltcPrice">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/ltc.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>LTC</h3>
+                    <h4>$<span id="ltcPrice">0.00</span></h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3 id="balance-ltc">0</h3>
+                <h4>$<span id="usd-ltc-balance"></span></h4>
+            </div>
+        </div>
+    </section>
+
+    <section class="swap__coins">
+        <div class="first__coin coin__swap">
+            <h3 class="swap__from">Send</h3>
+            <div class="asset" id="from-card">
+                <div class="leftrow">
+                    <img src="../assets/crypto_icons/btc.png" alt="btc" id="swap-crypto-img">
+                    <div class="leftrow__text">
+                        <h3 id="swap-crypto-name">BTC</h3>
+                    </div>
+                </div>
+    
+                <div class="rightrow">
+                    <img src="../assets/Arrow_down.png" alt="">
+                </div>
+            </div>
+            <input type="number" class="swap__input" id="send_sum" placeholder="0">
+        </div>
+    </section>
+
+    <section class="swap__coins">
+        <div class="first__coin coin__swap">
+            <h3 class="swap__from">To user</h3>
+            <div class="asset" id="from-card">
+            </div>
+            <input type="text" class="swap__input" id="send_username" placeholder="0">
+        </div>
+    </section>
+
+    <p id="send_error" class="hidden_err">Error</p>
+
+    <section class="buttons">
+        <div class="btns_container">
+            <a href="#" class="primary__blue__btn disabled" id="sendButton">Send</a>
+        </div>
+    </section>
+
+    <section class="bottom__menu">
+        <a href="/swallet_sugarteam/main_page" class="menu__button"><img src="../assets/Home Page.png" alt=""></a>
+        <a href="/swallet_sugarteam/swap" class="menu__button"><img src="../assets/Swap.png" alt=""></a>
+        <a href="/swallet_sugarteam/settings" class="menu__button"><img src="../assets/Gear.png" alt=""></a>
+    </section>
+</body>
+<script src="../index.js"></script>
+</html>

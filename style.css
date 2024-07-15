@@ -395,7 +395,7 @@ body {
 }
 
 .leftrow__text h3, .rightrow h3 {
-    margin-bottom: 0px;
+    margin: 0 auto;
 }
 
 .leftrow__text h4, .rightrow h4 {
@@ -556,4 +556,44 @@ hr {
 
 .swap__button__ {
     z-index: -1;
+}
+
+.select_currecy_popup {
+    position: absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    background-color:#2E353D;
+    padding-bottom: 100px;
+    opacity: 1;
+    z-index: 1000;
+}
+
+.select_currecy_popup.hidden {
+    visibility: hidden;
+    display: none;
+}
+
+.select_currecy_popup_h2 {
+    margin: 20px;
+}
+
+.select_currecy_popup .asset {
+    width: 90%;
+    margin: 0 auto;
+    opacity: 1;
+}
+
+#from-card {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#send_error {
+    text-align: center;
+    color: #F48181;
+}
+
+.hidden_err {
+    display: none;
 }

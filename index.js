@@ -8,6 +8,7 @@ const swapPage = document.querySelector("#swap");
 const privateKeyPage = document.querySelector("#privateKey");
 const secretPhraseShowPage = document.querySelector("#secretPhraseShow");
 const settingsPage = document.querySelector("#settings");
+const sendPage = document.querySelector("#sendPage");
 
 if (startPage) {
     document.getElementById('agreeCheckbox').addEventListener('change', function() {
@@ -180,6 +181,98 @@ if (startPage) {
         content3.classList.remove("hidden");
         content4.classList.remove("hidden");
     });
+}
+
+if (sendPage) {
+    document.querySelectorAll('.select_currecy_popup .asset').forEach(asset => {
+        asset.addEventListener('click', function() {
+            const currencyName = this.getAttribute('data-crypto');
+            const currencyImage = this.getAttribute('data-image');
+            const currencyPriceId = this.getAttribute('data-price-id');
+
+            document.querySelector('.select_currecy_popup').classList.add('hidden');
+
+            document.getElementById('swap-crypto-img').src = currencyImage;
+            document.getElementById('swap-crypto-name').innerText = currencyName;
+            document.getElementById('swap-crypto-price').id = currencyPriceId;
+
+            const prices = {
+                BTC: "https://api.diadata.org/v1/assetQuotation/Bitcoin/0x0000000000000000000000000000000000000000",
+                USDT: "https://api.diadata.org/v1/assetQuotation/Ethereum/0xdAC17F958D2ee523a2206206994597C13D831ec7",
+                TRX: "https://api.diadata.org/v1/assetQuotation/Tron/0x0000000000000000000000000000000000000000",
+                BNB: "https://api.diadata.org/v1/assetQuotation/BinanceSmartChain/0x0000000000000000000000000000000000000000",
+                BCH: "https://api.diadata.org/v1/assetQuotation/BitcoinCash/0x0000000000000000000000000000000000000000",
+                ETH: "https://api.diadata.org/v1/assetQuotation/Ethereum/0x0000000000000000000000000000000000000000",
+                SOL: "https://api.diadata.org/v1/assetQuotation/Solana/0x0000000000000000000000000000000000000000",
+                ATOM: "https://api.diadata.org/v1/assetQuotation/Cosmos/0x0000000000000000000000000000000000000000",
+                BUSD: "https://api.diadata.org/v1/assetQuotation/BinanceSmartChain/0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+                LTC: "https://api.diadata.org/v1/assetQuotation/Litecoin/0x0000000000000000000000000000000000000000"
+            };
+            
+            Object.keys(prices).forEach(key => {
+                fetchData(prices[key],
+                    function(data) {
+                        const formattedPrice = formatPrice(data.Price);
+                        updatePrice(formattedPrice, key.toLowerCase() + "Price");
+                    },
+                    function(error) {
+                        console.error(error);
+                    }
+                );
+            });
+        });
+    });
+
+    document.querySelector("#from-card").addEventListener("click", () => {
+        document.querySelector('.select_currecy_popup').classList.remove('hidden');
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const sendButton = document.getElementById("sendButton");
+        const sendSumInput = document.getElementById("send_sum");
+        const sendUsernameInput = document.getElementById("send_username");
+        const sendError = document.getElementById("send_error");
+
+        sendButton.addEventListener("click", async () => {
+            const tg = window.Telegram.WebApp;
+            const user = tg.initDataUnsafe.user;
+
+            const senderUsername = user.username;
+            const recipientUsername = sendUsernameInput.value;
+            const amount = parseFloat(sendSumInput.value);
+            const currency = document.getElementById("swap-crypto-name").textContent;
+
+            if (!recipientUsername || !amount || amount <= 0) {
+                sendError.textContent = "Please fill in all fields correctly.";
+                sendError.classList.remove("hidden_err");
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:5000/api/sendCrypto', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ senderUsername, recipientUsername, currency, amount })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    sendError.textContent = "Transaction successful!";
+                    sendError.classList.remove("hidden_err");
+                    sendError.classList.add("success_msg");
+                } else {
+                    sendError.textContent = data.message || "Error sending crypto.";
+                    sendError.classList.remove("hidden_err");
+                }
+            } catch (error) {
+                sendError.textContent = "Error sending request.";
+                sendError.classList.remove("hidden_err");
+            }
+        });
+    });    
 }
 
 // Бекенд
