@@ -597,3 +597,24 @@ hr {
 .hidden_err {
     display: none;
 }
+
+.transcation {
+    display: flex;
+    justify-content: space-around;
+}
+
+.transaction__left {
+    text-align: left;
+}
+
+.transaction__right {
+    text-align: right;
+}
+
+.transcation.incoming .transaction__left .transaction___sum {
+    color: #7ccc79;
+}
+
+.transcation.outcoming .transaction__left .transaction___sum {
+    color: #8f8f8f;
+}
