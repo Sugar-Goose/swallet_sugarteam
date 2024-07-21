@@ -611,10 +611,10 @@ hr {
     text-align: right;
 }
 
-.transaction.incoming .transaction__left .transaction___sum {
+.transaction.incoming .transaction__left .transaction__sum {
     color: #7ccc79;
 }
 
-.transaction.outcoming .transaction__left .transaction___sum {
+.transaction.outcoming .transaction__left .transaction__sum {
     color: #8f8f8f;
 }
