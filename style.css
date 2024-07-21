@@ -598,7 +598,7 @@ hr {
     display: none;
 }
 
-.transcation {
+.transaction {
     display: flex;
     justify-content: space-around;
 }
@@ -611,10 +611,10 @@ hr {
     text-align: right;
 }
 
-.transcation.incoming .transaction__left .transaction___sum {
+.transaction.incoming .transaction__left .transaction___sum {
     color: #7ccc79;
 }
 
-.transcation.outcoming .transaction__left .transaction___sum {
+.transaction.outcoming .transaction__left .transaction___sum {
     color: #8f8f8f;
 }
