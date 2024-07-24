@@ -600,7 +600,7 @@ hr {
 
 .transaction {
     display: flex;
-    justify-content: space-around;
+    justify-content: start;
 }
 
 .transaction__left {
@@ -617,4 +617,70 @@ hr {
 
 .transaction.outcoming .transaction__left .transaction__sum {
     color: #8f8f8f;
+}
+
+.info_block {
+    padding: 20px;
+    background-color: rgba(120, 125, 132, 0.1);
+    border-radius: 16px;
+}
+
+.info_block_element {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.view_on_block_container {
+    margin-top: 20px;
+}
+
+.view_on_block {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #007AFF;
+    text-align: center;
+}
+
+.transaction_error {
+    color: #F48181;
+    text-align: center;
+    opacity: 0;
+}
+
+.transaction_error.active {
+    transition: all 0.25s;
+    opacity: 1;
+}
+
+.check_svg {
+    fill: #007AFF;
+}
+
+.check_svg_container {
+    display: flex;
+    justify-content: center;
+    width: 30%;
+    margin: 0 auto;
+}
+
+#recipient_link, #sender_link {
+    text-decoration: underline;
+}
+
+.history__tab {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+}
+
+.transaction {
+    position: relative;
+}
+
+.transaction__right {
+    position: absolute;
+    top:0;
+    right:0;
 }
