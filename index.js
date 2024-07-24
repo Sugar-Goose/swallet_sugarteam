@@ -269,28 +269,6 @@ if (sendPage) {
     });    
 }
 
-if (successfulTransactionPage) {
-    document.addEventListener("DOMContentLoaded", async () => {
-    const tg = window.Telegram.WebApp;
-    const username = tg.initDataUnsafe.user.username;
-
-    try {
-        const response = await fetch(`http://localhost:5000/api/lastTransaction?username=${username}`);
-        const transaction = await response.json();
-
-        if (response.ok) {
-            document.getElementById("transaction_sum").textContent = `${transaction.amount} ${transaction.currency}`;
-            document.querySelector(".info_block_element:nth-child(1) h3:nth-child(2)").textContent = transaction.time;
-            document.getElementById("recipient_link").textContent = transaction.recipient;
-        } else {
-            console.error("Error fetching transaction:", transaction.message);
-        }
-    } catch (error) {
-        console.error("Error fetching transaction:", error);
-    }
-});
-}
-
 // Бекенд
 function fetchData(apiUrl, successCallback, errorCallback) {
     fetch(apiUrl, {
@@ -357,6 +335,10 @@ async function fetchTransactions(username) {
     }
 }
 
+function formatAmount(amount) {
+    return parseFloat(amount).toString();
+}
+
 function displayTransactions(transactions) {
     const historyTab = document.querySelector('.history__tab');
     historyTab.innerHTML = '';
@@ -365,13 +347,14 @@ function displayTransactions(transactions) {
         const isIncoming = transaction.recipient === username;
         const transactionClass = isIncoming ? 'incoming' : 'outcoming';
         const sign = isIncoming ? '+' : '-';
+        const formattedAmount = formatAmount(transaction.amount);
 
         const transactionHTML = `
             <div class="transaction ${transactionClass}">
                 <div class="transaction__left">
                     <h4>From: <span>${isIncoming ? transaction.sender : 'You'}</span></h4>
-                    <h4><span>${transaction.time}</span></h4>
-                    <h3 class="transaction__sum">${sign} <span>${transaction.amount.toFixed(12)}</span> <span>${transaction.currency}</span></h3>
+                    <h4><span>${transaction.time}</span> UTC+2</h4>
+                    <h3 class="transaction__sum">${sign} ${formattedAmount} ${transaction.currency}</h3>
                 </div>
                 <div class="transaction__right">
                     <h4>To: <span>${isIncoming ? 'You' : transaction.recipient}</span></h4>
@@ -382,6 +365,7 @@ function displayTransactions(transactions) {
         historyTab.innerHTML += transactionHTML;
     });
 }
+
 
 if (mainPage) {
     document.addEventListener('DOMContentLoaded', async () => {
