@@ -9,7 +9,6 @@ const privateKeyPage = document.querySelector("#privateKey");
 const secretPhraseShowPage = document.querySelector("#secretPhraseShow");
 const settingsPage = document.querySelector("#settings");
 const sendPage = document.querySelector("#sendPage");
-const successfulTransactionPage = document.querySelector("#successfulTransaction");
 
 if (startPage) {
     document.getElementById('agreeCheckbox').addEventListener('change', function() {
@@ -226,22 +225,22 @@ if (sendPage) {
         const sendSumInput = document.getElementById("send_sum");
         const sendUsernameInput = document.getElementById("send_username");
         const sendError = document.getElementById("send_error");
-    
+
         sendButton.addEventListener("click", async () => {
             const tg = window.Telegram.WebApp;
             const user = tg.initDataUnsafe.user;
-    
+
             const senderUsername = user.username;
             const recipientUsername = sendUsernameInput.value;
             const amount = parseFloat(sendSumInput.value);
             const currency = document.getElementById("swap-crypto-name").textContent;
-    
+
             if (!recipientUsername || !amount || amount <= 0) {
                 sendError.textContent = "Please fill in all fields correctly.";
                 sendError.classList.remove("hidden_err");
                 return;
             }
-    
+
             try {
                 const response = await fetch('http://localhost:5000/api/sendCrypto', {
                     method: 'POST',
@@ -250,12 +249,13 @@ if (sendPage) {
                     },
                     body: JSON.stringify({ senderUsername, recipientUsername, currency, amount })
                 });
-    
+
                 const data = await response.json();
-    
+
                 if (response.ok) {
-                    // Redirect to transaction details page
-                    redirectToTransactionDetails(data.transaction);
+                    sendError.textContent = "Transaction successful!";
+                    sendError.classList.remove("hidden_err");
+                    sendError.classList.add("success_msg");
                 } else {
                     sendError.textContent = data.message || "Error sending crypto.";
                     sendError.classList.remove("hidden_err");
@@ -265,33 +265,8 @@ if (sendPage) {
                 sendError.classList.remove("hidden_err");
             }
         });
-    
-        function redirectToTransactionDetails(transaction) {
-            const url = new URL('/transaction-details.html', window.location.origin);
-            url.searchParams.set('id', transaction._id);
-            url.searchParams.set('amount', `${transaction.amount} ${transaction.currency}`);
-            url.searchParams.set('date', transaction.time); // Adjust as needed
-            url.searchParams.set('recipient', transaction.recipient);
-            url.searchParams.set('status', 'Completed');
-    
-            window.location.href = url.toString();
-        }
     });    
 }
-
-if (successfulTransactionPage) {
-    const button = document.querySelector(".view_on_block");
-    const errorText = document.querySelector(".transaction_error");
-
-    button.addEventListener("click", () => {
-        errorText.classList.add("active");
-        
-        setTimeout(() => {
-            errorText.classList.remove("active");
-        }, 5000);
-    });
-}
-
 
 // Бекенд
 function fetchData(apiUrl, successCallback, errorCallback) {
