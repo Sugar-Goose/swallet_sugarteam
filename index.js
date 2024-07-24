@@ -9,6 +9,7 @@ const privateKeyPage = document.querySelector("#privateKey");
 const secretPhraseShowPage = document.querySelector("#secretPhraseShow");
 const settingsPage = document.querySelector("#settings");
 const sendPage = document.querySelector("#sendPage");
+const successfulTransactionPage = document.querySelector("#successfulTransaction");
 
 if (startPage) {
     document.getElementById('agreeCheckbox').addEventListener('change', function() {
@@ -266,6 +267,29 @@ if (sendPage) {
             }
         });
     });    
+}
+
+if (successfulTransactionPage) {
+    document.addEventListener("DOMContentLoaded", async () => {
+    const tg = window.Telegram.WebApp;
+    const username = tg.initDataUnsafe.user.username;
+
+    try {
+        const response = await fetch(`http://localhost:5000/api/lastTransaction?username=${username}`);
+        const transaction = await response.json();
+
+        if (response.ok) {
+            document.getElementById("transaction_sum").textContent = `${transaction.amount} ${transaction.currency}`;
+            document.querySelector("h3 span").textContent = transaction.usdAmount; // Assuming you have a conversion function
+            document.querySelector(".info_block_element:nth-child(1) h3:nth-child(2)").textContent = transaction.time;
+            document.getElementById("recipient_link").textContent = transaction.recipient;
+        } else {
+            console.error("Error fetching transaction:", transaction.message);
+        }
+    } catch (error) {
+        console.error("Error fetching transaction:", error);
+    }
+});
 }
 
 // Бекенд
