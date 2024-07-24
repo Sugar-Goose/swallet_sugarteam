@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" id="successfulTransaction">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction successful!</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <div class="backbutton"><a href="../"><-</a></div>
+    <h1 style="text-align: center;">Transfer</h1>
+    <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+    <svg class="check_svg_container" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path class="check_svg" fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM16.0303 8.96967C16.3232 9.26256 16.3232 9.73744 16.0303 10.0303L11.0303 15.0303C10.7374 15.3232 10.2626 15.3232 9.96967 15.0303L7.96967 13.0303C7.67678 12.7374 7.67678 12.2626 7.96967 11.9697C8.26256 11.6768 8.73744 11.6768 9.03033 11.9697L10.5 13.4393L12.7348 11.2045L14.9697 8.96967C15.2626 8.67678 15.7374 8.67678 16.0303 8.96967Z"/>
+    </svg>
+    <h2 style="text-align: center;" id="transaction_sum">-0,00065457 <span id="transaction_cur">BTC</span></h2>
+    <h3 style="text-align: center;">~<span id="usd_transaction_sum">44,11</span> $</h3>
+
+    <div class="info_block">
+        <div class="info_block_element">
+            <h3>Date</h3>
+            <h3 id="transactionDate_">10 Jun 2024 at 11:11 AM</h3>
+        </div>
+        
+        <div class="info_block_element">
+            <h3>Status</h3>
+            <h3>Completed</h3>
+        </div>
+
+        <div class="info_block_element">
+            <h3>Sender</h3>
+            <h3 id="sender_link">You</h3>
+        </div>
+
+        <div class="info_block_element">
+            <h3>Recipient</h3>
+            <h3 id="recipient_link">sugar_bump</h3>
+        </div>
+    </div>
+
+    <div class="info_block view_on_block_container">
+        <h3 class="view_on_block">View on block explorer</h3>
+    </div>
+
+    <h3 class="transaction_error">An error occurred while trying to search for a transaction in a block</h3>
+</body>
+<script src="../index.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", async () => {
+    const tg = window.Telegram.WebApp;
+    const username = tg.initDataUnsafe.user.username;
+
+    try {
+        const response = await fetch(`http://localhost:5000/api/lastTransaction?username=${username}`);
+        const transaction = await response.json();
+
+        if (response.ok) {
+            document.getElementById("transaction_sum").textContent = `${transaction.amount} ${transaction.currency}`;
+            document.querySelector("h3 span").textContent = transaction.usdAmount; // Assuming you have a conversion function
+            document.querySelector(".info_block_element:nth-child(1) h3:nth-child(2)").textContent = transaction.time;
+            document.getElementById("recipient_link").textContent = transaction.recipient;
+            // Add sender if you want to display it
+        } else {
+            console.error("Error fetching transaction:", transaction.message);
+        }
+    } catch (error) {
+        console.error("Error fetching transaction:", error);
+    }
+});
+
+</script>
+</html>

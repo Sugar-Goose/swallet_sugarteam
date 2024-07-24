@@ -406,7 +406,6 @@ body {
 
 hr {
     opacity: 0.2;
-    width:100%;
 }
 
 .sol_img {
@@ -426,10 +425,7 @@ hr {
 }
 
 .history__tab.active {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    flex-direction: column-reverse;
+    display: block;
 }
 
 .bottom__menu {
@@ -670,6 +666,14 @@ hr {
 
 #recipient_link, #sender_link {
     text-decoration: underline;
+}
+
+.history__tab {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+    display: none;
 }
 
 .transaction {
