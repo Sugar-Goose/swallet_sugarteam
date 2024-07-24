@@ -556,7 +556,7 @@ if (mainPage) {
             Object.keys(balances).forEach(key => {
                 const element = document.getElementById('balance-' + key);
                 if (element) {
-                    element.innerHTML = balances[key];
+                    element.innerHTML = balances[key].toFixed(5);
                 }
             });
 
