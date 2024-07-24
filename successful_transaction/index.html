@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transaction successful!</title>
     <link rel="stylesheet" href="../style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
     <div class="backbutton"><a href="../"><-</a></div>
@@ -45,28 +46,4 @@
     <h3 class="transaction_error">An error occurred while trying to search for a transaction in a block</h3>
 </body>
 <script src="../index.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", async () => {
-    const tg = window.Telegram.WebApp;
-    const username = tg.initDataUnsafe.user.username;
-
-    try {
-        const response = await fetch(`http://localhost:5000/api/lastTransaction?username=${username}`);
-        const transaction = await response.json();
-
-        if (response.ok) {
-            document.getElementById("transaction_sum").textContent = `${transaction.amount} ${transaction.currency}`;
-            document.querySelector("h3 span").textContent = transaction.usdAmount; // Assuming you have a conversion function
-            document.querySelector(".info_block_element:nth-child(1) h3:nth-child(2)").textContent = transaction.time;
-            document.getElementById("recipient_link").textContent = transaction.recipient;
-            // Add sender if you want to display it
-        } else {
-            console.error("Error fetching transaction:", transaction.message);
-        }
-    } catch (error) {
-        console.error("Error fetching transaction:", error);
-    }
-});
-
-</script>
 </html>
