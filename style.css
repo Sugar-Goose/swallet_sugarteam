@@ -673,6 +673,7 @@ hr {
     justify-content: center;
     flex-wrap: wrap;
     flex-direction: column-reverse;
+    display: none;
 }
 
 .transaction {
