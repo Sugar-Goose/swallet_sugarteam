@@ -280,7 +280,6 @@ if (successfulTransactionPage) {
 
         if (response.ok) {
             document.getElementById("transaction_sum").textContent = `${transaction.amount} ${transaction.currency}`;
-            document.querySelector("h3 span").textContent = transaction.usdAmount; // Assuming you have a conversion function
             document.querySelector(".info_block_element:nth-child(1) h3:nth-child(2)").textContent = transaction.time;
             document.getElementById("recipient_link").textContent = transaction.recipient;
         } else {
