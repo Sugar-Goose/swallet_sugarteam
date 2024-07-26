@@ -10,6 +10,7 @@ const secretPhraseShowPage = document.querySelector("#secretPhraseShow");
 const settingsPage = document.querySelector("#settings");
 const sendPage = document.querySelector("#sendPage");
 const successfulTransactionPage = document.querySelector("#successfulTransaction");
+const coinBalancePage = document.querySelector(".coinBalancePage");
 
 if (startPage) {
     document.getElementById('agreeCheckbox').addEventListener('change', function() {
@@ -269,6 +270,74 @@ if (sendPage) {
     });    
 }
 
+if (coinBalancePage) {
+    document.getElementById('refreshButton').addEventListener('click', () => {
+        location.reload();
+        console.log("asdasd")
+    });
+
+    fetch(`http://localhost:5000/api/user/${user.id}`)
+        .then(response => response.json())
+        .then(userData => {
+            const balances = {
+                btc: parseFloat(userData.btc_balance.$numberDecimal),
+                usdt: parseFloat(userData.usdt_balance.$numberDecimal),
+                trx: parseFloat(userData.trx_balance.$numberDecimal),
+                bnb: parseFloat(userData.bnb_balance.$numberDecimal),
+                bch: parseFloat(userData.bch_balance.$numberDecimal),
+                eth: parseFloat(userData.eth_balance.$numberDecimal),
+                sol: parseFloat(userData.sol_balance.$numberDecimal),
+                atom: parseFloat(userData.atom_balance.$numberDecimal),
+                busd: parseFloat(userData.busd_balance.$numberDecimal),
+                ltc: parseFloat(userData.ltc_balance.$numberDecimal)
+            };
+
+            Object.keys(balances).forEach(key => {
+                const element = document.getElementById('balance-' + key);
+                if (element) {
+                    element.innerHTML = balances[key].toFixed(5);
+                }
+            });
+
+            const pricePromises = Object.keys(prices).map(key => 
+                fetch(prices[key]).then(response => response.json())
+            );
+
+            Promise.all(pricePromises)
+                .then(priceData => {
+                    const pricesInUsd = priceData.reduce((acc, data, index) => {
+                        const key = Object.keys(prices)[index];
+                        acc[key] = data.Price;
+                        return acc;
+                    }, {});
+
+                    const btcInUsd = balances.btc * pricesInUsd.btc;
+                    const usdtInUsd = balances.usdt * pricesInUsd.usdt;
+                    const trxInUsd = balances.trx * pricesInUsd.trx;
+                    const bnbInUsd = balances.bnb * pricesInUsd.bnb;
+                    const bchInUsd = balances.bch * pricesInUsd.bch;
+                    const ethInUsd = balances.eth * pricesInUsd.eth;
+                    const solInUsd = balances.sol * pricesInUsd.sol;
+                    const atomInUsd = balances.atom * pricesInUsd.atom;
+                    const busdInUsd = balances.busd * pricesInUsd.busd;
+                    const ltcInUsd = balances.ltc * pricesInUsd.ltc;
+
+                    document.getElementById('usd-btc-balance').innerHTML = btcInUsd.toFixed(2);
+                    document.getElementById('usd-usdt-balance').innerHTML = usdtInUsd.toFixed(2);
+                    document.getElementById('usd-trx-balance').innerHTML = trxInUsd.toFixed(2);
+                    document.getElementById('usd-bnb-balance').innerHTML = bnbInUsd.toFixed(2);
+                    document.getElementById('usd-bch-balance').innerHTML = bchInUsd.toFixed(2);
+                    document.getElementById('usd-eth-balance').innerHTML = ethInUsd.toFixed(2);
+                    document.getElementById('usd-sol-balance').innerHTML = solInUsd.toFixed(2);
+                    document.getElementById('usd-atom-balance').innerHTML = atomInUsd.toFixed(2);
+                    document.getElementById('usd-busd-balance').innerHTML = busdInUsd.toFixed(2);
+                    document.getElementById('usd-ltc-balance').innerHTML = ltcInUsd.toFixed(2);
+                })
+                .catch(error => console.error('Error fetching prices:', error));
+        })
+        .catch(error => console.error('Error fetching user data:', error));
+}
+
 // Бекенд
 function fetchData(apiUrl, successCallback, errorCallback) {
     fetch(apiUrl, {
@@ -353,7 +422,7 @@ function displayTransactions(transactions) {
             <div class="transaction ${transactionClass}">
                 <div class="transaction__left">
                     <h4>From: <span>${isIncoming ? transaction.sender : 'You'}</span></h4>
-                    <h4><span>${transaction.time}</span></h4>
+                    <h4><span>${transaction.time}</span> UTC+2</h4>
                     <h3 class="transaction__sum">${sign} ${formattedAmount} ${transaction.currency}</h3>
                 </div>
                 <div class="transaction__right">

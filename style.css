@@ -681,3 +681,29 @@ hr {
     top:0;
     right:0;
 }
+
+.chain__name {
+    background-color: rgba(46, 53, 61, 0.7);
+    width: 60%;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 15px;
+    backdrop-filter: blur(6px);
+    margin-bottom: 20px;
+}
+
+.margin_coin_page {
+    margin: 20px;
+}
+
+.balance__container__ {
+    display: flex;
+    justify-content: center;
+    gap:20px;
+    align-items: center;
+}
+
+.assets a {
+    text-decoration: none;
+    color: #FFF;
+}
