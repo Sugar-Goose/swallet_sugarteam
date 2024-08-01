@@ -508,6 +508,11 @@ if (startPage) {
 }
 
 // Отображение данных пользователя
+
+function formatAmount(amount) {
+    return parseFloat(amount).toString();
+}
+
 if (mainPage) {
     const prices = {
         btc: "https://api.diadata.org/v1/assetQuotation/Bitcoin/0x0000000000000000000000000000000000000000",
@@ -538,10 +543,12 @@ if (mainPage) {
                 ltc: parseFloat(userData.ltc_balance.$numberDecimal)
             };
 
+
             Object.keys(balances).forEach(key => {
                 const element = document.getElementById('balance-' + key);
+                const formattedBalance = formatAmount(balances[key]);
                 if (element) {
-                    element.innerHTML = balances[key].toFixed(5);
+                    element.innerHTML = formattedBalance.toFixed(5);
                 }
             });
 
@@ -624,8 +631,9 @@ if (coinBalancePage) {
 
             Object.keys(balances).forEach(key => {
                 const element = document.getElementById('balance-' + key);
+                const formattedBalance = formatAmount(balances[key]);
                 if (element) {
-                    element.innerHTML = balances[key].toFixed(5);
+                    element.innerHTML = formattedBalance.toFixed(5);
                 }
             });
 
@@ -736,8 +744,9 @@ if (sendPage) {
 
             Object.keys(balances).forEach(key => {
                 const element = document.getElementById('balance-' + key);
+                const formattedBalance = formatAmount(balances[key]);
                 if (element) {
-                    element.innerHTML = balances[key];
+                    element.innerHTML = formattedBalance;
                 }
             });
 
