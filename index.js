@@ -328,13 +328,21 @@ document.addEventListener("DOMContentLoaded", () => {
                             return acc;
                         }, {});
 
-                        // Update USD balance elements
+                        // Calculate USD balances
+                        const usdBalances = {};
                         Object.keys(balances).forEach(key => {
-                            const usdBalanceElement = document.getElementById('usd-' + key + '-balance');
-                            if (usdBalanceElement && !isNaN(balances[key]) && pricesInUsd[key]) {
-                                usdBalanceElement.textContent = (balances[key] * pricesInUsd[key]).toFixed(2);
+                            if (!isNaN(balances[key]) && !isNaN(pricesInUsd[key])) {
+                                usdBalances[key] = balances[key] * pricesInUsd[key];
                             } else {
-                                usdBalanceElement.textContent = '0.00'; // Default to 0.00 if data is missing or incorrect
+                                usdBalances[key] = 0; // Default to 0 if data is missing or incorrect
+                            }
+                        });
+
+                        // Update USD balance elements
+                        Object.keys(usdBalances).forEach(key => {
+                            const usdBalanceElement = document.getElementById('usd-' + key + '-balance');
+                            if (usdBalanceElement) {
+                                usdBalanceElement.textContent = usdBalances[key].toFixed(2);
                             }
                         });
                     })
@@ -343,6 +351,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(error => console.error('Error fetching user data:', error));
     }
 });
+
 
 
 
