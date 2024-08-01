@@ -422,7 +422,7 @@ function displayTransactions(transactions) {
             <div class="transaction ${transactionClass}">
                 <div class="transaction__left">
                     <h4>From: <span>${isIncoming ? transaction.sender : 'You'}</span></h4>
-                    <h4><span>${transaction.time}</span> UTC+2</h4>
+                    <h4><span>${transaction.time}</span></h4>
                     <h3 class="transaction__sum">${sign} ${formattedAmount} ${transaction.currency}</h3>
                 </div>
                 <div class="transaction__right">
