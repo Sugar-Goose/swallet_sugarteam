@@ -304,19 +304,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
                 const priceUrls = {
-                    BTC: "https://api.diadata.org/v1/assetQuotation/Bitcoin/0x0000000000000000000000000000000000000000",
-                    USDT: "https://api.diadata.org/v1/assetQuotation/Ethereum/0xdAC17F958D2ee523a2206206994597C13D831ec7",
-                    TRX: "https://api.diadata.org/v1/assetQuotation/Tron/0x0000000000000000000000000000000000000000",
-                    BNB: "https://api.diadata.org/v1/assetQuotation/BinanceSmartChain/0x0000000000000000000000000000000000000000",
-                    BCH: "https://api.diadata.org/v1/assetQuotation/BitcoinCash/0x0000000000000000000000000000000000000000",
-                    ETH: "https://api.diadata.org/v1/assetQuotation/Ethereum/0x0000000000000000000000000000000000000000",
-                    SOL: "https://api.diadata.org/v1/assetQuotation/Solana/0x0000000000000000000000000000000000000000",
-                    ATOM: "https://api.diadata.org/v1/assetQuotation/Cosmos/0x0000000000000000000000000000000000000000",
-                    BUSD: "https://api.diadata.org/v1/assetQuotation/BinanceSmartChain/0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
-                    LTC: "https://api.diadata.org/v1/assetQuotation/Litecoin/0x0000000000000000000000000000000000000000"
+                    btc: "https://api.diadata.org/v1/assetQuotation/Bitcoin/0x0000000000000000000000000000000000000000",
+                    usdt: "https://api.diadata.org/v1/assetQuotation/Ethereum/0xdAC17F958D2ee523a2206206994597C13D831ec7",
+                    trx: "https://api.diadata.org/v1/assetQuotation/Tron/0x0000000000000000000000000000000000000000",
+                    bnb: "https://api.diadata.org/v1/assetQuotation/BinanceSmartChain/0x0000000000000000000000000000000000000000",
+                    bch: "https://api.diadata.org/v1/assetQuotation/BitcoinCash/0x0000000000000000000000000000000000000000",
+                    eth: "https://api.diadata.org/v1/assetQuotation/Ethereum/0x0000000000000000000000000000000000000000",
+                    sol: "https://api.diadata.org/v1/assetQuotation/Solana/0x0000000000000000000000000000000000000000",
+                    atom: "https://api.diadata.org/v1/assetQuotation/Cosmos/0x0000000000000000000000000000000000000000",
+                    busd: "https://api.diadata.org/v1/assetQuotation/BinanceSmartChain/0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+                    ltc: "https://api.diadata.org/v1/assetQuotation/Litecoin/0x0000000000000000000000000000000000000000"
                 };
 
-                const pricePromises = Object.keys(priceUrls).map(key =>
+                const pricePromises = Object.keys(priceUrls).map(key => 
                     fetch(priceUrls[key]).then(response => response.json())
                 );
 
@@ -324,15 +324,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     .then(priceData => {
                         const pricesInUsd = priceData.reduce((acc, data, index) => {
                             const key = Object.keys(priceUrls)[index];
-                            acc[key] = data.price;
+                            acc[key] = parseFloat(data.price); // ensure price is parsed as a float
                             return acc;
                         }, {});
 
                         // Update USD balance elements
                         Object.keys(balances).forEach(key => {
                             const usdBalanceElement = document.getElementById('usd-' + key + '-balance');
-                            if (usdBalanceElement) {
+                            if (usdBalanceElement && !isNaN(balances[key]) && pricesInUsd[key]) {
                                 usdBalanceElement.textContent = (balances[key] * pricesInUsd[key]).toFixed(2);
+                            } else {
+                                usdBalanceElement.textContent = '0.00'; // Default to 0.00 if data is missing or incorrect
                             }
                         });
                     })
@@ -341,6 +343,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(error => console.error('Error fetching user data:', error));
     }
 });
+
 
 
 // Бекенд
