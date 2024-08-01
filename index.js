@@ -272,7 +272,7 @@ if (sendPage) {
 
 if (coinBalancePage) {
     document.getElementById('refreshButton').addEventListener('click', () => {
-        location.reload();
+        location.reload(true);
         console.log("asdasd")
     });
 
