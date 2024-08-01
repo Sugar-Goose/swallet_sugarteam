@@ -270,73 +270,6 @@ if (sendPage) {
     });    
 }
 
-if (coinBalancePage) {
-    document.getElementById('refreshButton').addEventListener('click', () => {
-        location.reload();
-    });
-
-    fetch(`http://localhost:3000/api/user/${user.id}`)
-        .then(response => response.json())
-        .then(userData => {
-            const balances = {
-                btc: parseFloat(userData.btc_balance.$numberDecimal),
-                usdt: parseFloat(userData.usdt_balance.$numberDecimal),
-                trx: parseFloat(userData.trx_balance.$numberDecimal),
-                bnb: parseFloat(userData.bnb_balance.$numberDecimal),
-                bch: parseFloat(userData.bch_balance.$numberDecimal),
-                eth: parseFloat(userData.eth_balance.$numberDecimal),
-                sol: parseFloat(userData.sol_balance.$numberDecimal),
-                atom: parseFloat(userData.atom_balance.$numberDecimal),
-                busd: parseFloat(userData.busd_balance.$numberDecimal),
-                ltc: parseFloat(userData.ltc_balance.$numberDecimal)
-            };
-
-            Object.keys(balances).forEach(key => {
-                const element = document.getElementById('balance-' + key);
-                if (element) {
-                    element.innerHTML = balances[key].toFixed(5);
-                }
-            });
-
-            const pricePromises = Object.keys(prices).map(key => 
-                fetch(prices[key]).then(response => response.json())
-            );
-
-            Promise.all(pricePromises)
-                .then(priceData => {
-                    const pricesInUsd = priceData.reduce((acc, data, index) => {
-                        const key = Object.keys(prices)[index];
-                        acc[key] = data.Price;
-                        return acc;
-                    }, {});
-
-                    const btcInUsd = balances.btc * pricesInUsd.btc;
-                    const usdtInUsd = balances.usdt * pricesInUsd.usdt;
-                    const trxInUsd = balances.trx * pricesInUsd.trx;
-                    const bnbInUsd = balances.bnb * pricesInUsd.bnb;
-                    const bchInUsd = balances.bch * pricesInUsd.bch;
-                    const ethInUsd = balances.eth * pricesInUsd.eth;
-                    const solInUsd = balances.sol * pricesInUsd.sol;
-                    const atomInUsd = balances.atom * pricesInUsd.atom;
-                    const busdInUsd = balances.busd * pricesInUsd.busd;
-                    const ltcInUsd = balances.ltc * pricesInUsd.ltc;
-
-                    document.getElementById('usd-btc-balance').innerHTML = btcInUsd.toFixed(2);
-                    document.getElementById('usd-usdt-balance').innerHTML = usdtInUsd.toFixed(2);
-                    document.getElementById('usd-trx-balance').innerHTML = trxInUsd.toFixed(2);
-                    document.getElementById('usd-bnb-balance').innerHTML = bnbInUsd.toFixed(2);
-                    document.getElementById('usd-bch-balance').innerHTML = bchInUsd.toFixed(2);
-                    document.getElementById('usd-eth-balance').innerHTML = ethInUsd.toFixed(2);
-                    document.getElementById('usd-sol-balance').innerHTML = solInUsd.toFixed(2);
-                    document.getElementById('usd-atom-balance').innerHTML = atomInUsd.toFixed(2);
-                    document.getElementById('usd-busd-balance').innerHTML = busdInUsd.toFixed(2);
-                    document.getElementById('usd-ltc-balance').innerHTML = ltcInUsd.toFixed(2);
-                })
-                .catch(error => console.error('Error fetching prices:', error));
-        })
-        .catch(error => console.error('Error fetching user data:', error));
-}
-
 // Бекенд
 function fetchData(apiUrl, successCallback, errorCallback) {
     fetch(apiUrl, {
@@ -657,6 +590,88 @@ if (mainPage) {
         location.reload(true);
     });
 }
+
+
+if (coinBalancePage) {
+    const prices = {
+        btc: "https://api.diadata.org/v1/assetQuotation/Bitcoin/0x0000000000000000000000000000000000000000",
+        usdt: "https://api.diadata.org/v1/assetQuotation/Ethereum/0xdAC17F958D2ee523a2206206994597C13D831ec7",
+        trx: "https://api.diadata.org/v1/assetQuotation/Tron/0x0000000000000000000000000000000000000000",
+        bnb: "https://api.diadata.org/v1/assetQuotation/BinanceSmartChain/0x0000000000000000000000000000000000000000",
+        bch: "https://api.diadata.org/v1/assetQuotation/BitcoinCash/0x0000000000000000000000000000000000000000",
+        eth: "https://api.diadata.org/v1/assetQuotation/Ethereum/0x0000000000000000000000000000000000000000",
+        sol: "https://api.diadata.org/v1/assetQuotation/Solana/0x0000000000000000000000000000000000000000",
+        atom: "https://api.diadata.org/v1/assetQuotation/Cosmos/0x0000000000000000000000000000000000000000",
+        busd: "https://api.diadata.org/v1/assetQuotation/BinanceSmartChain/0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+        ltc: "https://api.diadata.org/v1/assetQuotation/Litecoin/0x0000000000000000000000000000000000000000"
+    };
+
+    fetch(`http://localhost:3000/api/user/${user.id}`)
+        .then(response => response.json())
+        .then(userData => {
+            const balances = {
+                btc: parseFloat(userData.btc_balance.$numberDecimal),
+                usdt: parseFloat(userData.usdt_balance.$numberDecimal),
+                trx: parseFloat(userData.trx_balance.$numberDecimal),
+                bnb: parseFloat(userData.bnb_balance.$numberDecimal),
+                bch: parseFloat(userData.bch_balance.$numberDecimal),
+                eth: parseFloat(userData.eth_balance.$numberDecimal),
+                sol: parseFloat(userData.sol_balance.$numberDecimal),
+                atom: parseFloat(userData.atom_balance.$numberDecimal),
+                busd: parseFloat(userData.busd_balance.$numberDecimal),
+                ltc: parseFloat(userData.ltc_balance.$numberDecimal)
+            };
+
+            Object.keys(balances).forEach(key => {
+                const element = document.getElementById('balance-' + key);
+                if (element) {
+                    element.innerHTML = balances[key].toFixed(5);
+                }
+            });
+
+            const pricePromises = Object.keys(prices).map(key => 
+                fetch(prices[key]).then(response => response.json())
+            );
+
+            Promise.all(pricePromises)
+                .then(priceData => {
+                    const pricesInUsd = priceData.reduce((acc, data, index) => {
+                        const key = Object.keys(prices)[index];
+                        acc[key] = data.Price;
+                        return acc;
+                    }, {});
+
+                    const btcInUsd = balances.btc * pricesInUsd.btc;
+                    const usdtInUsd = balances.usdt * pricesInUsd.usdt;
+                    const trxInUsd = balances.trx * pricesInUsd.trx;
+                    const bnbInUsd = balances.bnb * pricesInUsd.bnb;
+                    const bchInUsd = balances.bch * pricesInUsd.bch;
+                    const ethInUsd = balances.eth * pricesInUsd.eth;
+                    const solInUsd = balances.sol * pricesInUsd.sol;
+                    const atomInUsd = balances.atom * pricesInUsd.atom;
+                    const busdInUsd = balances.busd * pricesInUsd.busd;
+                    const ltcInUsd = balances.ltc * pricesInUsd.ltc;
+
+                    document.getElementById('usd-btc-balance').innerHTML = btcInUsd.toFixed(2);
+                    document.getElementById('usd-usdt-balance').innerHTML = usdtInUsd.toFixed(2);
+                    document.getElementById('usd-trx-balance').innerHTML = trxInUsd.toFixed(2);
+                    document.getElementById('usd-bnb-balance').innerHTML = bnbInUsd.toFixed(2);
+                    document.getElementById('usd-bch-balance').innerHTML = bchInUsd.toFixed(2);
+                    document.getElementById('usd-eth-balance').innerHTML = ethInUsd.toFixed(2);
+                    document.getElementById('usd-sol-balance').innerHTML = solInUsd.toFixed(2);
+                    document.getElementById('usd-atom-balance').innerHTML = atomInUsd.toFixed(2);
+                    document.getElementById('usd-busd-balance').innerHTML = busdInUsd.toFixed(2);
+                    document.getElementById('usd-ltc-balance').innerHTML = ltcInUsd.toFixed(2);
+                })
+                .catch(error => console.error('Error fetching prices:', error));
+        })
+        .catch(error => console.error('Error fetching user data:', error));
+    
+    document.getElementById('refreshButton').addEventListener('click', () => {
+        location.reload(true);
+    });
+}
+
 
 if (sendPage) {
     const prices = {
