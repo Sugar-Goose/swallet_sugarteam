@@ -707,3 +707,24 @@ hr {
     text-decoration: none;
     color: #FFF;
 }
+
+.loading_text {
+    font-weight: bold;
+    background: linear-gradient(90deg, #283a46, #8b8c8d, #283a46);
+    background-size: 400% 400%;
+    color: transparent;
+    border-radius: 16px;
+    animation: gradientShift 2.5s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
