@@ -652,16 +652,47 @@ if (coinBalancePage) {
                     const busdInUsd = balances.busd * pricesInUsd.busd;
                     const ltcInUsd = balances.ltc * pricesInUsd.ltc;
 
-                    document.getElementById('usd-btc-balance').innerHTML = btcInUsd.toFixed(2);
-                    document.getElementById('usd-usdt-balance').innerHTML = usdtInUsd.toFixed(2);
-                    document.getElementById('usd-trx-balance').innerHTML = trxInUsd.toFixed(2);
-                    document.getElementById('usd-bnb-balance').innerHTML = bnbInUsd.toFixed(2);
-                    document.getElementById('usd-bch-balance').innerHTML = bchInUsd.toFixed(2);
-                    document.getElementById('usd-eth-balance').innerHTML = ethInUsd.toFixed(2);
-                    document.getElementById('usd-sol-balance').innerHTML = solInUsd.toFixed(2);
-                    document.getElementById('usd-atom-balance').innerHTML = atomInUsd.toFixed(2);
-                    document.getElementById('usd-busd-balance').innerHTML = busdInUsd.toFixed(2);
-                    document.getElementById('usd-ltc-balance').innerHTML = ltcInUsd.toFixed(2);
+                    const btcBalancePage = document.querySelector("#btc-wallet-page");
+                    const usdtBalancePage = document.querySelector("#usdt-wallet-page");
+                    const trxBalancePage = document.querySelector("#trx-wallet-page");
+                    const bnbBalancePage = document.querySelector("#bnb-wallet-page");
+                    const bchBalancePage = document.querySelector("#bch-wallet-page");
+                    const ethBalancePage = document.querySelector("#eth-wallet-page");
+                    const solBalancePage = document.querySelector("#sol-wallet-page");
+                    const atomBalancePage = document.querySelector("#atom-wallet-page");
+                    const busdBalancePage = document.querySelector("#busd-wallet-page");
+                    const ltcBalancePage = document.querySelector("#ltc-wallet-page");
+
+                    if (btcBalancePage) {
+                        document.getElementById('usd-btc-balance').innerHTML = btcInUsd.toFixed(2);
+                    }
+                    if (usdtBalancePage) {
+                        document.getElementById('usd-usdt-balance').innerHTML = usdtInUsd.toFixed(2);
+                    }
+                    if (trxBalancePage) {
+                        document.getElementById('usd-trx-balance').innerHTML = trxInUsd.toFixed(2);
+                    }
+                    if (bnbBalancePage) {
+                        document.getElementById('usd-bnb-balance').innerHTML = bnbInUsd.toFixed(2);
+                    }
+                    if (bchBalancePage) {
+                        document.getElementById('usd-bch-balance').innerHTML = bchInUsd.toFixed(2);
+                    }
+                    if (ethBalancePage) {
+                        document.getElementById('usd-eth-balance').innerHTML = ethInUsd.toFixed(2);
+                    }
+                    if (solBalancePage) {
+                        document.getElementById('usd-sol-balance').innerHTML = solInUsd.toFixed(2);
+                    }
+                    if (atomBalancePage) {
+                        document.getElementById('usd-atom-balance').innerHTML = atomInUsd.toFixed(2);
+                    }
+                    if (busdBalancePage) {
+                        document.getElementById('usd-busd-balance').innerHTML = busdInUsd.toFixed(2);
+                    }
+                    if (ltcBalancePage) {
+                        document.getElementById('usd-ltc-balance').innerHTML = ltcInUsd.toFixed(2);
+                    } 
                 })
                 .catch(error => console.error('Error fetching prices:', error));
         })
