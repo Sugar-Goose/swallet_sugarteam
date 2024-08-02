@@ -836,13 +836,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const coin = document.querySelector('.coinBalancePage').id.split('-')[0]; // e.g., 'atom'
 
+        // Fetch transactions for the user
         fetch(`http://localhost:3000/api/transactions?username=${user.username}`)
             .then(response => response.json())
             .then(transactions => {
                 const filteredTransactions = transactions.filter(tx => tx.coin && tx.coin.toLowerCase() === coin);
 
                 const historyTab = document.querySelector('.history__tab');
-                historyTab.innerHTML = ''; 
+                historyTab.innerHTML = ''; // Clear existing content
 
                 if (filteredTransactions.length > 0) {
                     filteredTransactions.forEach(tx => {
