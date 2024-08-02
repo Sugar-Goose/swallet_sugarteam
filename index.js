@@ -839,10 +839,10 @@ document.addEventListener("DOMContentLoaded", () => {
         fetch(`http://localhost:3000/api/transactions?username=${user.username}`)
             .then(response => response.json())
             .then(transactions => {
-                const filteredTransactions = transactions.filter(tx => tx.coin.toLowerCase() === coin);
+                const filteredTransactions = transactions.filter(tx => tx.coin && tx.coin.toLowerCase() === coin);
 
                 const historyTab = document.querySelector('.history__tab');
-                historyTab.innerHTML = '';
+                historyTab.innerHTML = ''; 
 
                 if (filteredTransactions.length > 0) {
                     filteredTransactions.forEach(tx => {
@@ -872,4 +872,3 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(error => console.error('Error fetching transactions:', error));
     }
 });
-
