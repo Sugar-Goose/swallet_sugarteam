@@ -785,7 +785,7 @@ if (sendPage) {
         .catch(error => console.error('Error fetching user data:', error));
     
     document.getElementById('refreshButton').addEventListener('click', () => {
-        location.reload();
+        location.reload(true);
     });
 }
 
