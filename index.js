@@ -74,13 +74,6 @@ if (mainPage) {
             historyBtn.classList.add('active');
             historyTab.classList.add('active');
         });
-
-        
-        let usernameHeader = document.getElementById('username');
-        let userLastNameHeader = document.getElementById('lastname');
-
-        usernameHeader.innerHTML = user_id;
-        userLastNameHeader.innerHTML = user_lastname;
     });
 }
 
