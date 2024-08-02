@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const preloader = document.querySelector(".preloader");
     if (preloader) {
         setTimeout(() => {
-            preloader.classList.remove("hidden");
+            preloader.classList.add("hidden");
         }, 500);
     }
 });
