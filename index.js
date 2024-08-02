@@ -74,6 +74,13 @@ if (mainPage) {
             historyBtn.classList.add('active');
             historyTab.classList.add('active');
         });
+
+        
+        let usernameHeader = document.getElementById('username');
+        let userLastNameHeader = document.getElementById('lastname');
+
+        usernameHeader.innerHTML = user_id;
+        userLastNameHeader.innerHTML = user_lastname;
     });
 }
 
@@ -284,12 +291,8 @@ function updatePrice(price, elementId) {
     const element = document.getElementById(elementId);
     if (element) {
         element.innerHTML = price;
-        setTimeout(() => {
-            element.classList.remove('loading_text');
-        }, 1000);
     }
 }
-
 
 // Получение и обновление цен на монеты
 const prices = {
@@ -361,9 +364,6 @@ function displayTransactions(transactions) {
             <hr>
         `;
         historyTab.innerHTML += transactionHTML;
-        setTimeout(() => {
-            historyTab.classList.remove('loading_text');
-        }, 1000);
     });
 }
 
@@ -375,9 +375,6 @@ if (mainPage) {
             displayTransactions(transactions);
         } else {
             document.querySelector('.history__tab').innerHTML = '<h3>History is empty</h3>';
-            setTimeout(() => {
-                document.querySelector('.history__tab').classList.remove('loading_text');
-            }, 1000);
         }
     });
 }
@@ -511,11 +508,6 @@ if (startPage) {
 }
 
 // Отображение данных пользователя
-
-function formatAmount(amount) {
-    return parseFloat(amount).toString();
-}
-
 if (mainPage) {
     const prices = {
         btc: "https://api.diadata.org/v1/assetQuotation/Bitcoin/0x0000000000000000000000000000000000000000",
@@ -546,15 +538,10 @@ if (mainPage) {
                 ltc: parseFloat(userData.ltc_balance.$numberDecimal)
             };
 
-
             Object.keys(balances).forEach(key => {
                 const element = document.getElementById('balance-' + key);
-                const formattedBalance = formatAmount(balances[key]);
                 if (element) {
-                    element.innerHTML = formattedBalance.toFixed(5);
-                    setTimeout(() => {
-                        element.classList.remove('loading_text');
-                    }, 1000);
+                    element.innerHTML = balances[key].toFixed(5);
                 }
             });
 
@@ -582,51 +569,18 @@ if (mainPage) {
                     const ltcInUsd = balances.ltc * pricesInUsd.ltc;
 
                     document.getElementById('usd-btc-balance').innerHTML = btcInUsd.toFixed(2);
-                    setTimeout(() => {
-                        document.getElementById('usd-btc-balance').classList.remove('loading_text');
-                    }, 1000);
                     document.getElementById('usd-usdt-balance').innerHTML = usdtInUsd.toFixed(2);
-                    setTimeout(() => {
-                        document.getElementById('usd-usdt-balance').classList.remove('loading_text');
-                    }, 1000);
                     document.getElementById('usd-trx-balance').innerHTML = trxInUsd.toFixed(2);
-                    setTimeout(() => {
-                        document.getElementById('usd-trx-balance').classList.remove('loading_text');
-                    }, 1000);
                     document.getElementById('usd-bnb-balance').innerHTML = bnbInUsd.toFixed(2);
-                    setTimeout(() => {
-                        document.getElementById('usd-bnb-balance').classList.remove('loading_text');
-                    }, 1000);
                     document.getElementById('usd-bch-balance').innerHTML = bchInUsd.toFixed(2);
-                    setTimeout(() => {
-                        document.getElementById('usd-bch-balance').classList.remove('loading_text');
-                    }, 1000);
                     document.getElementById('usd-eth-balance').innerHTML = ethInUsd.toFixed(2);
-                    setTimeout(() => {
-                        document.getElementById('usd-eth-balance').classList.remove('loading_text');
-                    }, 1000);
                     document.getElementById('usd-sol-balance').innerHTML = solInUsd.toFixed(2);
-                    setTimeout(() => {
-                        document.getElementById('usd-sol-balance').classList.remove('loading_text');
-                    }, 1000);
                     document.getElementById('usd-atom-balance').innerHTML = atomInUsd.toFixed(2);
-                    setTimeout(() => {
-                        document.getElementById('usd-atom-balance').classList.remove('loading_text');
-                    }, 1000);
                     document.getElementById('usd-busd-balance').innerHTML = busdInUsd.toFixed(2);
-                    setTimeout(() => {
-                        document.getElementById('usd-busd-balance').classList.remove('loading_text');
-                    }, 1000);
                     document.getElementById('usd-ltc-balance').innerHTML = ltcInUsd.toFixed(2);
-                    setTimeout(() => {
-                        document.getElementById('usd-ltc-balance').classList.remove('loading_text');
-                    }, 1000);
 
                     let TOTALBALANCE = btcInUsd + usdtInUsd + trxInUsd + bnbInUsd + bchInUsd + ethInUsd + solInUsd + busdInUsd + atomInUsd + ltcInUsd;
                     document.getElementById('totalBalance').innerHTML = TOTALBALANCE.toFixed(2);
-                    setTimeout(() => {
-                        document.getElementById('totalBalance').classList.remove('loading_text');
-                    }, 1000);
                 })
                 .catch(error => console.error('Error fetching prices:', error));
         })
@@ -670,12 +624,8 @@ if (coinBalancePage) {
 
             Object.keys(balances).forEach(key => {
                 const element = document.getElementById('balance-' + key);
-                const formattedBalance = formatAmount(balances[key]);
                 if (element) {
-                    element.innerHTML = formattedBalance.toFixed(5);
-                    setTimeout(() => {
-                        element.classList.remove('loading_text');
-                    }, 1000);
+                    element.innerHTML = balances[key].toFixed(5);
                 }
             });
 
@@ -715,63 +665,33 @@ if (coinBalancePage) {
 
                     if (btcBalancePage) {
                         document.getElementById('usd-btc-balance').innerHTML = btcInUsd.toFixed(2);
-                        setTimeout(() => {
-                            document.getElementById('usd-btc-balance').classList.remove('loading_text');
-                        }, 1000);
                     }
                     if (usdtBalancePage) {
                         document.getElementById('usd-usdt-balance').innerHTML = usdtInUsd.toFixed(2);
-                        setTimeout(() => {
-                            document.getElementById('usd-usdt-balance').classList.remove('loading_text');
-                        }, 1000);
                     }
                     if (trxBalancePage) {
                         document.getElementById('usd-trx-balance').innerHTML = trxInUsd.toFixed(2);
-                        setTimeout(() => {
-                            document.getElementById('usd-trx-balance').classList.remove('loading_text');
-                        }, 1000);
                     }
                     if (bnbBalancePage) {
                         document.getElementById('usd-bnb-balance').innerHTML = bnbInUsd.toFixed(2);
-                        setTimeout(() => {
-                            document.getElementById('usd-bnb-balance').classList.remove('loading_text');
-                        }, 1000);
                     }
                     if (bchBalancePage) {
                         document.getElementById('usd-bch-balance').innerHTML = bchInUsd.toFixed(2);
-                        setTimeout(() => {
-                            document.getElementById('usd-bch-balance').classList.remove('loading_text');
-                        }, 1000);
                     }
                     if (ethBalancePage) {
                         document.getElementById('usd-eth-balance').innerHTML = ethInUsd.toFixed(2);
-                        setTimeout(() => {
-                            document.getElementById('usd-eth-balance').classList.remove('loading_text');
-                        }, 1000);
                     }
                     if (solBalancePage) {
                         document.getElementById('usd-sol-balance').innerHTML = solInUsd.toFixed(2);
-                        setTimeout(() => {
-                            document.getElementById('usd-sol-balance').classList.remove('loading_text');
-                        }, 1000);
                     }
                     if (atomBalancePage) {
                         document.getElementById('usd-atom-balance').innerHTML = atomInUsd.toFixed(2);
-                        setTimeout(() => {
-                            document.getElementById('usd-atom-balance').classList.remove('loading_text');
-                        }, 1000);
                     }
                     if (busdBalancePage) {
                         document.getElementById('usd-busd-balance').innerHTML = busdInUsd.toFixed(2);
-                        setTimeout(() => {
-                            document.getElementById('usd-busd-balance').classList.remove('loading_text');
-                        }, 1000);
                     }
                     if (ltcBalancePage) {
                         document.getElementById('usd-ltc-balance').innerHTML = ltcInUsd.toFixed(2);
-                        setTimeout(() => {
-                            document.getElementById('usd-ltc-balance').classList.remove('loading_text');
-                        }, 1000);
                     } 
                 })
                 .catch(error => console.error('Error fetching prices:', error));
@@ -816,12 +736,8 @@ if (sendPage) {
 
             Object.keys(balances).forEach(key => {
                 const element = document.getElementById('balance-' + key);
-                const formattedBalance = formatAmount(balances[key]);
                 if (element) {
-                    element.innerHTML = formattedBalance;
-                    setTimeout(() => {
-                        element.classList.remove('loading_text');
-                    }, 1000);
+                    element.innerHTML = balances[key];
                 }
             });
 
@@ -849,51 +765,18 @@ if (sendPage) {
                     const ltcInUsd = balances.ltc * pricesInUsd.ltc;
 
                     document.getElementById('usd-btc-balance').innerHTML = btcInUsd.toFixed(2);
-                    setTimeout(() => {
-                        document.getElementById('usd-btc-balance').classList.remove('loading_text');
-                    }, 1000);
                     document.getElementById('usd-usdt-balance').innerHTML = usdtInUsd.toFixed(2);
-                    setTimeout(() => {
-                        document.getElementById('usd-usdt-balance').classList.remove('loading_text');
-                    }, 1000);
                     document.getElementById('usd-trx-balance').innerHTML = trxInUsd.toFixed(2);
-                    setTimeout(() => {
-                        document.getElementById('usd-trx-balance').classList.remove('loading_text');
-                    }, 1000);
                     document.getElementById('usd-bnb-balance').innerHTML = bnbInUsd.toFixed(2);
-                    setTimeout(() => {
-                        document.getElementById('usd-bnb-balance').classList.remove('loading_text');
-                    }, 1000);
                     document.getElementById('usd-bch-balance').innerHTML = bchInUsd.toFixed(2);
-                    setTimeout(() => {
-                        document.getElementById('usd-bch-balance').classList.remove('loading_text');
-                    }, 1000);
                     document.getElementById('usd-eth-balance').innerHTML = ethInUsd.toFixed(2);
-                    setTimeout(() => {
-                        document.getElementById('usd-eth-balance').classList.remove('loading_text');
-                    }, 1000);
                     document.getElementById('usd-sol-balance').innerHTML = solInUsd.toFixed(2);
-                    setTimeout(() => {
-                        document.getElementById('usd-sol-balance').classList.remove('loading_text');
-                    }, 1000);
                     document.getElementById('usd-atom-balance').innerHTML = atomInUsd.toFixed(2);
-                    setTimeout(() => {
-                        document.getElementById('usd-atom-balance').classList.remove('loading_text');
-                    }, 1000);
                     document.getElementById('usd-busd-balance').innerHTML = busdInUsd.toFixed(2);
-                    setTimeout(() => {
-                        document.getElementById('usd-busd-balance').classList.remove('loading_text');
-                    }, 1000);
                     document.getElementById('usd-ltc-balance').innerHTML = ltcInUsd.toFixed(2);
-                    setTimeout(() => {
-                        document.getElementById('usd-ltc-balance').classList.remove('loading_text');
-                    }, 1000);
 
                     let TOTALBALANCE = btcInUsd + usdtInUsd + trxInUsd + bnbInUsd + bchInUsd + ethInUsd + solInUsd + busdInUsd + atomInUsd + ltcInUsd;
                     document.getElementById('totalBalance').innerHTML = TOTALBALANCE.toFixed(2);
-                    setTimeout(() => {
-                        document.getElementById('totalBalance').classList.remove('loading_text');
-                    }, 1000);
                 })
                 .catch(error => console.error('Error fetching prices:', error));
         })
@@ -913,11 +796,7 @@ if (sercretPhrasePage) {
         const words = userData.phrase.split(" ");
         for (let i = 0; i < words.length; i++) {
             document.querySelector(`#word${i + 1}`).innerHTML = words[i];
-            setTimeout(() => {
-                words[i].classList.remove('loading_text');
-            }, 1000);
         }
-        
     })
     .catch(error => console.error('Error:', error));
 }
@@ -930,9 +809,6 @@ if (secretPhraseShowPage) {
         const words = userData.phrase.split(" ");
         for (let i = 0; i < words.length; i++) {
             document.querySelector(`#word${i + 1}`).innerHTML = words[i];
-            setTimeout(() => {
-                words[i].classList.remove('loading_text');
-            }, 1000);
         }
     })
     .catch(error => console.error('Error:', error));
@@ -946,9 +822,6 @@ if (privateKeyPage) {
         const secretKey = userData.key;
         const keyarea = document.querySelector("#privateKeyText");
         keyarea.innerHTML = secretKey;
-        setTimeout(() => {
-            keyarea.classList.remove('loading_text');
-        }, 1000);
     })
     .catch(error => console.error('Error:', error));
 }
