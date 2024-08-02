@@ -834,15 +834,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const tg = window.Telegram.WebApp;
         const user = tg.initDataUnsafe.user;
 
-        const coin = document.querySelector('.coinBalancePage').id.split('-')[0];
+        const coin = document.querySelector('.coinBalancePage').id.split('-')[0]; // e.g., 'atom'
 
-        fetch(`http://localhost:3000/api/transactions/${user.id}`)
+        fetch(`http://localhost:3000/api/transactions?username=${user.username}`)
             .then(response => response.json())
             .then(transactions => {
                 const filteredTransactions = transactions.filter(tx => tx.coin.toLowerCase() === coin);
-                
+
                 const historyTab = document.querySelector('.history__tab');
-                historyTab.innerHTML = ''; 
+                historyTab.innerHTML = '';
 
                 if (filteredTransactions.length > 0) {
                     filteredTransactions.forEach(tx => {
@@ -872,3 +872,4 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(error => console.error('Error fetching transactions:', error));
     }
 });
+
