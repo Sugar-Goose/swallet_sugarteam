@@ -12,6 +12,15 @@ const sendPage = document.querySelector("#sendPage");
 const successfulTransactionPage = document.querySelector("#successfulTransaction");
 const coinBalancePage = document.querySelector(".coinBalancePage");
 
+document.addEventListener("DOMContentLoaded", () => {
+    const preloader = document.querySelector(".preloader");
+    if (preloader) {
+        setTimeout(() => {
+            preloader.classList.remove("hidden");
+        }, 500);
+    }
+});
+
 if (startPage) {
     document.getElementById('agreeCheckbox').addEventListener('change', function() {
         const isChecked = this.checked;
