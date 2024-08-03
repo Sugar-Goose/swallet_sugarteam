@@ -866,6 +866,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             <div class="transaction__right">
                                 <h4>To: <span>${tx.sender.toLowerCase() === user.username.toLowerCase() ? tx.recipient : 'You'}</span></h4>
                             </div>
+                            <hr>
                         `;
 
                         historyTab.appendChild(txElement);
