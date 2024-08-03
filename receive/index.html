@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" id="receivePage">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receive crypto</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+    <div class="backbutton" id="back"><a><-</a></div>
+    <section class="select_currecy_popup">
+        <h2 class="select_currecy_popup_h2">Select crypto to receive</h2>
+        <div class="asset" data-currency-name="BTC" data-crypto="BTC (Bitcoin)" data-image="../assets/crypto_icons/btc.png" data-price-id="btcPrice" data-minimum-dep="0.0003 BTC">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/btc.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>BTC</h3>
+                    <h4>$<span id="btcPrice">0.00</span></h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3 id="balance-btc">0</h3>
+                <h4>$<span id="usd-btc-balance"></span></h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset" data-currency-name="USDT" data-crypto="USDT TRC20 (Tron)" data-image="../assets/crypto_icons/usdt.png" data-price-id="usdtPrice" data-minimum-dep="10 USDT">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/usdt.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>USDT</h3>
+                    <h4>$<span id="usdtPrice">0.00</span></h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3 id="balance-usdt">0</h3>
+                <h4>$<span id="usd-usdt-balance"></span></h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset" data-currency-name="TRX" data-crypto="TRX (Tron)" data-image="../assets/crypto_icons/trx.png" data-price-id="trxPrice" data-minimum-dep="400 TRX">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/trx.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>TRX</h3>
+                    <h4>$<span id="trxPrice">0.00</span></h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3 id="balance-trx">0</h3>
+                <h4>$<span id="usd-trx-balance"></span></h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset" data-currency-name="BNB" data-crypto="BNB (BNB Smart Chain)" data-image="../assets/crypto_icons/bnb.png" data-price-id="bnbPrice" data-minimum-dep="0.019 BNB">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/bnb.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>BNB</h3>
+                    <h4>$<span id="bnbPrice">0.00</span></h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3 id="balance-bnb">0</h3>
+                <h4>$<span id="usd-bnb-balance"></span></h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset" data-currency-name="BCH" data-crypto="BCH (Bitcoin Cash)" data-image="../assets/crypto_icons/bch.png" data-price-id="bchPrice" data-minimum-dep="0.036 BCH">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/bch.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>BCH</h3>
+                    <h4>$<span id="bchPrice">0.00</span></h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3 id="balance-bch">0</h3>
+                <h4>$<span id="usd-bch-balance"></span></h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset" data-currency-name="ETH" data-crypto="ETH (Ethereum)" data-image="../assets/crypto_icons/eth.png" data-price-id="ethPrice" data-minimum-dep="0.00034 ETH">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/eth.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>ETH</h3>
+                    <h4>$<span id="ethPrice">0.00</span></h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3 id="balance-eth">0</h3>
+                <h4>$<span id="usd-eth-balance"></span></h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset" data-currency-name="SOL" data-crypto="SOL (Solana)" data-image="../assets/crypto_icons/sol.png" data-price-id="solPrice" data-minimum-dep="0.069776366744584 SOL">
+            <div class="leftrow">
+                <img class="sol_img" src="../assets/crypto_icons/sol.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>SOL</h3>
+                    <h4>$<span id="solPrice">0.00</span></h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3 id="balance-sol">0</h3>
+                <h4>$<span id="usd-sol-balance"></span></h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset" data-currency-name="ATOM" data-crypto="ATOM (Cosmos Hub)" data-image="../assets/crypto_icons/atom.png" data-price-id="atomPrice" data-minimum-dep="2 ATOM">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/atom.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>ATOM</h3>
+                    <h4>$<span id="atomPrice">0.00</span></h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3 id="balance-atom">0</h3>
+                <h4>$<span id="usd-atom-balance"></span></h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset" data-currency-name="BUSD" data-crypto="BUSD ERC20 (Ethereum)" data-image="../assets/crypto_icons/busd.png" data-price-id="busdPrice" data-minimum-dep="1 BUSD">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/busd.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>BUSD</h3>
+                    <h4>$<span id="busdPrice">0.00</span></h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3 id="balance-busd">0</h3>
+                <h4>$<span id="usd-busd-balance"></span></h4>
+            </div>
+        </div>
+        <hr>
+
+        <div class="asset" data-currency-name="LTC" data-crypto="LTC (Litecoin)" data-image="../assets/crypto_icons/ltc.png" data-price-id="ltcPrice" data-minimum-dep="0.78 LTC">
+            <div class="leftrow">
+                <img src="../assets/crypto_icons/ltc.png" alt="btc">
+                <div class="leftrow__text">
+                    <h3>LTC</h3>
+                    <h4>$<span id="ltcPrice">0.00</span></h4>
+                </div>
+            </div>
+
+            <div class="rightrow">
+                <h3 id="balance-ltc">0</h3>
+                <h4>$<span id="usd-ltc-balance"></span></h4>
+            </div>
+        </div>
+    </section>
+
+    <section class="receive__container">
+        <div class="img__container">
+            <img id="currency-image" src="../assets/crypto_icons/btc.png">
+        </div>
+        <h1 id="currency-name" style="text-align: center;">BTC (Bitcoin)</h1>
+        <div class="copyAddressContainer">
+            <h4 style="word-wrap: break-word; overflow-wrap: break-word; text-align: center;" id="wallet-address">UQAdVuuT8I5OvCA0FTLMdxo2LqDgHufxXPBLBTecYGSbUiPe</h4>
+            <hr>
+            <p id="copyButton_address">Copy</p>
+        </div>
+    </section>
+
+    <section id="minimum_deposit_block">
+        <h3 style="text-align: center; color: #F48181;">Please be careful! The minimum deposit amount is <span id="minimum_dep_text" style="text-decoration: underline; color: #FFF;">10 USDT</span>. No restrictions apply to transfers from SWallet user.</h3>
+    </section>
+
+    <p id="send_error" class="hidden_err">Error</p>
+
+    <section class="bottom__menu">
+        <a href="/swallet_sugarteam/main_page" class="menu__button"><img src="../assets/Home Page.png" alt=""></a>
+        <a href="/swallet_sugarteam/swap" class="menu__button"><img src="../assets/Swap.png" alt=""></a>
+        <a href="/swallet_sugarteam/settings" class="menu__button"><img src="../assets/Gear.png" alt=""></a>
+    </section>
+</body>
+<script src="../index.js"></script>
+</html>

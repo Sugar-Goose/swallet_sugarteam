@@ -11,6 +11,7 @@ const settingsPage = document.querySelector("#settings");
 const sendPage = document.querySelector("#sendPage");
 const successfulTransactionPage = document.querySelector("#successfulTransaction");
 const coinBalancePage = document.querySelector(".coinBalancePage");
+const receivePage = document.querySelector("#receivePage")
 
 document.addEventListener("DOMContentLoaded", () => {
     const preloader = document.querySelector(".preloader");
@@ -270,6 +271,57 @@ if (sendPage) {
             }
         });
     });    
+}
+
+if (receivePage) {
+    document.querySelectorAll('.select_currecy_popup .asset').forEach(asset => {
+        asset.addEventListener('click', function() {
+            const currencyImage = this.getAttribute('data-image');
+            const currencyNameSmall = this.getAttribute('data-currency-name');
+
+            document.querySelector('.select_currecy_popup').classList.add('hidden');
+
+            document.getElementById('currency-image').src = currencyImage;
+            document.getElementById('currency-name').innerText = this.getAttribute('data-crypto');
+            document.getElementById('minimum_dep_text').innerText = this.getAttribute('data-minimum-dep');
+
+            fetch(`http://localhost:3000/api/getAddress/${currencyNameSmall}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.address) {
+                        document.getElementById('wallet-address').innerText = data.address;
+                    } else {
+                        document.getElementById('wallet-address').innerText = 'Address not found';
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('wallet-address').innerText = 'Error fetching address';
+                });
+        });
+    });
+
+    document.querySelector("#back").addEventListener('click', () => {
+        document.querySelector(".select_currecy_popup").classList.remove("hidden")
+    });
+
+    document.getElementById('copyButton_address').addEventListener('click', function() {
+        let addressText = document.querySelector('#wallet-address').innerHTML;
+        addressText = addressText.replace(/<br>/g, '');
+
+        const tempElement = document.createElement('textarea');
+        tempElement.value = addressText;
+        document.body.appendChild(tempElement);
+        tempElement.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempElement);
+
+        document.getElementById("copyButton_address").innerHTML = "Copied!"
+        document.getElementById("copyButton_address").style.color = "#51df7b"
+        setTimeout(() => {
+            document.getElementById("copyButton_address").innerHTML = "Copy"
+        document.getElementById("copyButton_address").style.color = "#FFF"
+        }, 2000);
+    });
 }
 
 // Бекенд
@@ -878,4 +930,3 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(error => console.error('Error fetching transactions:', error));
     }
 });
-

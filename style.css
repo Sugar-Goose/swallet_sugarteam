@@ -908,3 +908,32 @@ hr {
   .dot:nth-child(13) {
     --uib-scale: 0.82;
   }
+
+#refreshButton {
+    cursor: pointer;
+}
+
+.img__container {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.img__container img {
+    width: 30%;
+}
+
+.copyAddressContainer {
+    background-color: rgba(0,0,0, 0.2);
+    padding: 10px;
+    border-radius: 16px;
+}
+
+#copyButton_address {
+    cursor: pointer;
+}
+
+#back {
+    cursor: pointer;
+}
