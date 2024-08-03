@@ -828,43 +828,43 @@ if (privateKeyPage) {
     .catch(error => console.error('Error:', error));
 }
 
-// Отображение транзакций для каждой монеты
 document.addEventListener("DOMContentLoaded", () => {
     if (document.querySelector(".coinBalancePage")) {
         const tg = window.Telegram.WebApp;
         const user = tg.initDataUnsafe.user;
 
         const coin = document.querySelector('.coinBalancePage').id.split('-')[0]; // e.g., 'atom'
-        console.log('Current coin:', coin); // Добавлено
+        console.log('Current coin:', coin);
 
-        // Fetch transactions for the user
         fetch(`http://localhost:3000/api/transactions?username=${user.username}`)
             .then(response => response.json())
             .then(transactions => {
-                console.log('Fetched transactions:', transactions); // Добавлено
+                console.log('Fetched transactions:', transactions);
 
                 const filteredTransactions = transactions.filter(tx => tx.currency && tx.currency.toLowerCase() === coin);
-                console.log('Filtered transactions:', filteredTransactions); // Обновлено
+                console.log('Filtered transactions:', filteredTransactions);
 
                 const historyTab = document.querySelector('.history__tab');
-                historyTab.innerHTML = ''; // Clear existing content
+                historyTab.innerHTML = '';
 
                 if (filteredTransactions.length > 0) {
                     filteredTransactions.forEach(tx => {
+                        const isIncoming = tx.sender.toLowerCase() !== user.username.toLowerCase();
+                        const transactionClass = isIncoming ? 'incoming' : 'outgoing';
+                        const sign = isIncoming ? '+' : '-';
+                        const formattedAmount = parseFloat(tx.amount).toFixed(5).replace(/\.?0+$/, '');
+
                         const txElement = document.createElement('div');
-                        txElement.classList.add('transaction', tx.sender.toLowerCase() === user.username.toLowerCase() ? 'outgoing' : 'incoming');
-
-                        const date = new Date(tx.time).toLocaleString();
-                        const amount = parseFloat(tx.amount).toFixed(5).replace(/\.?0+$/, '');
-
                         txElement.innerHTML = `
-                            <div class="transaction__left">
-                                <h4>From: <span>${tx.sender.toLowerCase() === user.username.toLowerCase() ? 'You' : tx.sender}</span></h4>
-                                <h4><span>${date}</span></h4>
-                                <h3 class="transaction__sum">${tx.sender.toLowerCase() === user.username.toLowerCase() ? '-' : '+'} ${amount} ${coin.toUpperCase()}</h3>
-                            </div>
-                            <div class="transaction__right">
-                                <h4>To: <span>${tx.sender.toLowerCase() === user.username.toLowerCase() ? tx.recipient : 'You'}</span></h4>
+                            <div class="transaction ${transactionClass}">
+                                <div class="transaction__left">
+                                    <h4>From: <span>${isIncoming ? tx.sender : 'You'}</span></h4>
+                                    <h4><span>${tx.time}</span></h4>
+                                    <h3 class="transaction__sum">${sign} ${formattedAmount} ${tx.currency}</h3>
+                                </div>
+                                <div class="transaction__right">
+                                    <h4>To: <span>${isIncoming ? 'You' : tx.recipient}</span></h4>
+                                </div>
                             </div>
                             <hr>
                         `;
@@ -878,3 +878,4 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(error => console.error('Error fetching transactions:', error));
     }
 });
+
