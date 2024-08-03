@@ -273,55 +273,6 @@ if (sendPage) {
 }
 
 // Бекенд
-
-// Отображение транзакций на страницах монет
-document.addEventListener("DOMContentLoaded", () => {
-    if (document.querySelector(".coinBalancePage")) {
-        const tg = window.Telegram.WebApp;
-        const user = tg.initDataUnsafe.user;
-
-        const coin = document.querySelector('.coinBalancePage').id.split('-')[0];
-        console.log('Current coin:', coin);
-
-        fetch(`http://localhost:3000/api/transactions?username=${user.username}`)
-            .then(response => response.json())
-            .then(transactions => {
-                console.log('Fetched transactions:', transactions); // Добавлено
-
-                const filteredTransactions = transactions.filter(tx => tx.coin && tx.coin.toLowerCase() === coin);
-                console.log('Filtered transactions:', filteredTransactions);
-                const historyTab = document.querySelector('.history__tab');
-                historyTab.innerHTML = ''; // Clear existing content
-
-                if (filteredTransactions.length > 0) {
-                    filteredTransactions.forEach(tx => {
-                        const txElement = document.createElement('div');
-                        txElement.classList.add('transaction', tx.type);
-
-                        const date = new Date(tx.date).toLocaleString();
-                        const amount = parseFloat(tx.amount).toFixed(5).replace(/\.?0+$/, '');
-
-                        txElement.innerHTML = `
-                            <div class="transaction__left">
-                                <h4>From: <span>${tx.type === 'incoming' ? tx.from : 'You'}</span></h4>
-                                <h4><span>${date}</span></h4>
-                                <h3 class="transaction__sum">${tx.type === 'incoming' ? '+' : '-'} ${amount} ${coin.toUpperCase()}</h3>
-                            </div>
-                            <div class="transaction__right">
-                                <h4>To: <span>${tx.type === 'incoming' ? 'You' : tx.to}</span></h4>
-                            </div>
-                        `;
-
-                        historyTab.appendChild(txElement);
-                    });
-                } else {
-                    historyTab.innerHTML = '<h3>History is empty</h3>';
-                }
-            })
-            .catch(error => console.error('Error fetching transactions:', error));
-    }
-});
-
 function fetchData(apiUrl, successCallback, errorCallback) {
     fetch(apiUrl, {
         method: "GET",
@@ -876,3 +827,53 @@ if (privateKeyPage) {
     })
     .catch(error => console.error('Error:', error));
 }
+
+// Отображение транзакций для каждой монеты
+document.addEventListener("DOMContentLoaded", () => {
+    if (document.querySelector(".coinBalancePage")) {
+        const tg = window.Telegram.WebApp;
+        const user = tg.initDataUnsafe.user;
+
+        const coin = document.querySelector('.coinBalancePage').id.split('-')[0]; // e.g., 'atom'
+        console.log('Current coin:', coin); // Добавлено
+
+        // Fetch transactions for the user
+        fetch(`http://localhost:3000/api/transactions?username=${user.username}`)
+            .then(response => response.json())
+            .then(transactions => {
+                console.log('Fetched transactions:', transactions); // Добавлено
+
+                const filteredTransactions = transactions.filter(tx => tx.currency && tx.currency.toLowerCase() === coin);
+                console.log('Filtered transactions:', filteredTransactions); // Обновлено
+
+                const historyTab = document.querySelector('.history__tab');
+                historyTab.innerHTML = ''; // Clear existing content
+
+                if (filteredTransactions.length > 0) {
+                    filteredTransactions.forEach(tx => {
+                        const txElement = document.createElement('div');
+                        txElement.classList.add('transaction', tx.sender.toLowerCase() === user.username.toLowerCase() ? 'outgoing' : 'incoming');
+
+                        const date = new Date(tx.time).toLocaleString();
+                        const amount = parseFloat(tx.amount).toFixed(5).replace(/\.?0+$/, '');
+
+                        txElement.innerHTML = `
+                            <div class="transaction__left">
+                                <h4>From: <span>${tx.sender.toLowerCase() === user.username.toLowerCase() ? 'You' : tx.sender}</span></h4>
+                                <h4><span>${date}</span></h4>
+                                <h3 class="transaction__sum">${tx.sender.toLowerCase() === user.username.toLowerCase() ? '-' : '+'} ${amount} ${coin.toUpperCase()}</h3>
+                            </div>
+                            <div class="transaction__right">
+                                <h4>To: <span>${tx.sender.toLowerCase() === user.username.toLowerCase() ? tx.recipient : 'You'}</span></h4>
+                            </div>
+                        `;
+
+                        historyTab.appendChild(txElement);
+                    });
+                } else {
+                    historyTab.innerHTML = '<h3>History is empty</h3>';
+                }
+            })
+            .catch(error => console.error('Error fetching transactions:', error));
+    }
+});
