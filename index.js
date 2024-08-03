@@ -834,14 +834,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const tg = window.Telegram.WebApp;
         const user = tg.initDataUnsafe.user;
 
-        const coin = document.querySelector('.coinBalancePage').id.split('-')[0]; // e.g., 'atom'
+        const coin = document.querySelector('.coinBalancePage').id.split('-')[0];
+        console.log('Current coin:', coin);
 
-        // Fetch transactions for the user
         fetch(`http://localhost:3000/api/transactions?username=${user.username}`)
             .then(response => response.json())
             .then(transactions => {
-                const filteredTransactions = transactions.filter(tx => tx.coin && tx.coin.toLowerCase() === coin);
+                console.log('Fetched transactions:', transactions); // Добавлено
 
+                const filteredTransactions = transactions.filter(tx => tx.coin && tx.coin.toLowerCase() === coin);
+                console.log('Filtered transactions:', filteredTransactions);
                 const historyTab = document.querySelector('.history__tab');
                 historyTab.innerHTML = ''; // Clear existing content
 
@@ -873,3 +875,4 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(error => console.error('Error fetching transactions:', error));
     }
 });
+
